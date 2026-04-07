@@ -1,18 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useState } from 'react'
 
 export function useViewModel(VMClass, ...args) {
-  const [vm] = useState(() => new VMClass(...args));
-  const [, setState] = useState(() => vm.getState());
+  const [vm] = useState(() => new VMClass(...args))
+  const [state, setState] = useState(() => vm.getState())
 
   useEffect(() => {
-    const unsubscribe = vm.subscribe(() => {
-      setState(vm.getState());
-    });
-    return () => {
-      unsubscribe();
-      vm.dispose();
-    };
-  }, [vm]);
+    const unsubscribe = vm.subscribe(setState)
 
-  return vm;
+    return () => {
+      unsubscribe()
+      vm.dispose()
+    }
+  }, [vm])
+
+  return { vm, state }
 }

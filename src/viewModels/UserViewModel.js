@@ -1,72 +1,100 @@
-import { BaseViewModel } from './BaseViewModel';
-import { User } from '../models/User';
+import { BaseViewModel } from './BaseViewModel'
+import { User } from '../models/User'
+import { loginUser, logoutUser, updateUserProfile } from '../services/fintechService'
+
+const INITIAL_STATE = {
+  user: null,
+  loading: false,
+  error: null,
+}
 
 export class UserViewModel extends BaseViewModel {
   constructor() {
-    super();
-    this.state = {
-      user: null,
-      loading: false,
-      error: null,
-    };
+    super({ ...INITIAL_STATE })
   }
 
   get user() {
-    return this.state.user;
+    return this.state.user
   }
 
   get loading() {
-    return this.state.loading;
+    return this.state.loading
   }
 
   get error() {
-    return this.state.error;
+    return this.state.error
   }
 
   get isLoggedIn() {
-    return !!this.state.user;
+    return !!this.state.user
   }
 
   get displayName() {
-    return this.state.user?.displayName || 'Guest';
+    return this.state.user?.displayName || 'Guest'
   }
 
   get formattedBalance() {
-    return this.state.user?.formatBalance() || '$0.00';
+    return this.state.user?.formatBalance() || '$0.00'
+  }
+
+  syncUser(userData) {
+    this.setState({
+      user: userData ? User.fromJSON(userData) : null,
+      loading: false,
+    })
   }
 
   async login(email, password) {
-    this.setState({ loading: true, error: null });
+    this.setState({ loading: true, error: null })
+
     try {
-      // TODO: Replace with actual API call
-      const userData = {
-        id: 1,
-        email,
-        name: email.split('@')[0],
-        balance: 10000,
-        createdAt: new Date(),
-      };
-      const user = User.fromJSON(userData);
-      this.setState({ user, loading: false });
+      const userData = await loginUser(email, password)
+      const user = User.fromJSON(userData)
+      this.setState({ user, loading: false })
+      return user
     } catch (error) {
-      this.setState({ error: error.message, loading: false });
+      this.setState({
+        error: error instanceof Error ? error.message : 'We could not sign you in.',
+        loading: false,
+      })
+      return null
     }
   }
 
   async logout() {
-    this.setState({ user: null, loading: false });
+    this.setState({ loading: true, error: null })
+
+    try {
+      await logoutUser()
+      this.setState({ ...INITIAL_STATE })
+    } catch (error) {
+      this.setState({
+        user: null,
+        loading: false,
+        error: error instanceof Error ? error.message : 'We could not sign you out.',
+      })
+    }
   }
 
   async updateProfile(updates) {
-    if (!this.state.user) return;
-    
-    this.setState({ loading: true, error: null });
+    if (!this.state.user) {
+      return null
+    }
+
+    this.setState({ loading: true, error: null })
+
     try {
-      // TODO: Replace with actual API call
-      const updatedUser = new User({ ...this.state.user.toJSON(), ...updates });
-      this.setState({ user: updatedUser, loading: false });
+      const userData = await updateUserProfile(this.state.user.id, updates)
+      const updatedUser = User.fromJSON(userData)
+      this.setState({ user: updatedUser, loading: false })
+      return updatedUser
     } catch (error) {
-      this.setState({ error: error.message, loading: false });
+      this.setState({
+        error:
+          error instanceof Error ? error.message : 'We could not update the profile.',
+        loading: false,
+      })
+      return null
     }
   }
 }
