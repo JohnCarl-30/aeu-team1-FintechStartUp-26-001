@@ -546,7 +546,6 @@ footer {
 }
 
 .pricing-card.featured {
-  border-color: var(--accent);
   background: linear-gradient(135deg, rgba(110, 231, 183, 0.05), var(--bg2));
 }
 
@@ -555,6 +554,7 @@ footer {
   border-color: var(--accent);
   box-shadow: 0 0 20px rgba(110, 231, 183, 0.15);
   transform: translateY(-4px);
+  z-index: 2; /* Ensure the selected card is on top for the shadow/glow */
 }
 
 .popular-tag {
