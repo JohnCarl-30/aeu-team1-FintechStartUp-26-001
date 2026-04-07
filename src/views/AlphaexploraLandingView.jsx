@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AlphaexploraLandingViewModel, useViewModel } from '../viewModels'
 
 function useAnimatedNumber(target) {
@@ -167,9 +168,9 @@ export function AlphaexploraLandingView() {
   return (
     <div className="alphaexplora-page">
       <nav>
-        <div className="nav-logo">
+        <Link to="/" className="nav-logo">
           Alphaexplora<span>.</span>
-        </div>
+        </Link>
         <ul className="nav-links">
           <li>
             <a href="#features">Features</a>
@@ -456,9 +457,9 @@ export function AlphaexploraLandingView() {
       </section>
 
       <footer>
-        <div className="footer-logo">
+        <Link to="/" className="footer-logo">
           Alphaexplora<span>.</span>
-        </div>
+        </Link>
         <p className="footer-copy">
           Copyright {new Date().getFullYear()} Alphaexplora Technologies, Inc. All rights reserved.
         </p>
