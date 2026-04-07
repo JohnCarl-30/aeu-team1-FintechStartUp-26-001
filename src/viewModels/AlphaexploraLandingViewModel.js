@@ -24,7 +24,7 @@ export class AlphaexploraLandingViewModel extends BaseViewModel {
       plans: AlphaexploraPlan.fromJSONArray(content.plans),
       testimonials: AlphaexploraTestimonial.fromJSONArray(content.testimonials),
       pricingMode: 'monthly',
-      selectedPlan: null,
+      selectedPlan: 'Business',
       currentSlide: 0,
       isSliderPaused: false,
       email: '',
