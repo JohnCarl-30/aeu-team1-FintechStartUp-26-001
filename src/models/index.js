@@ -1,3 +1,7 @@
 export { BaseModel } from './BaseModel'
+export { NexusFeature } from './NexusFeature'
+export { NexusPlan } from './NexusPlan'
+export { NexusStat } from './NexusStat'
+export { NexusTestimonial } from './NexusTestimonial'
 export { User } from './User'
 export { Transaction } from './Transaction'
