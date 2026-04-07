@@ -1,6 +1,6 @@
 import { BaseModel } from './BaseModel'
 
-export class NexusFeature extends BaseModel {
+export class AlphaexploraFeature extends BaseModel {
   constructor(data = {}) {
     super(data)
     this.icon = data.icon ?? ''

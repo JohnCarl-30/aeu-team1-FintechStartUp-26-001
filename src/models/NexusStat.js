@@ -1,6 +1,6 @@
 import { BaseModel } from './BaseModel'
 
-export class NexusStat extends BaseModel {
+export class AlphaexploraStat extends BaseModel {
   constructor(data = {}) {
     super(data)
     this.value = data.value ?? ''

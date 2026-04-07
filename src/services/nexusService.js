@@ -1,5 +1,5 @@
 const landingPageContent = {
-  pageTitle: 'Nexus - Enterprise Software Platform',
+  pageTitle: 'Alphaexplora - Enterprise Software Platform',
   stats: [
     { value: '98%', label: 'Uptime SLA guaranteed' },
     { value: '3.2x', label: 'Average productivity gain' },
@@ -130,7 +130,7 @@ const landingPageContent = {
       name: 'Sarah Reinholt',
       role: 'VP of Engineering, Meridian Technologies',
       quote:
-        'Switching to Nexus cut our cross-team communication overhead by nearly half. What used to take three tools and a Slack thread now happens in one place, with an audit trail and zero dropped context.',
+        'Switching to Alphaexplora cut our cross-team communication overhead by nearly half. What used to take three tools and a Slack thread now happens in one place, with an audit trail and zero dropped context.',
     },
     {
       initials: 'DK',
@@ -144,14 +144,14 @@ const landingPageContent = {
       name: 'Anika Metzger',
       role: 'CISO, Orbis Financial Group',
       quote:
-        'Our security team had concerns about moving to a new platform. Nexus documentation and the dedicated security review call resolved every one of them. The RBAC model feels enterprise-grade.',
+        'Our security team had concerns about moving to a new platform. Alphaexplora documentation and the dedicated security review call resolved every one of them. The RBAC model feels enterprise-grade.',
     },
   ],
 }
 
 const seededEmails = [
   'test@test.com',
-  'admin@nexus.com',
+  'admin@alphaexplora.com',
   'demo@example.com',
   'john@acme.org',
   'marketing@trial.io',

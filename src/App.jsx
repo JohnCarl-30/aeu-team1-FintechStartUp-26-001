@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
-import { NexusLandingViewModel, useViewModel } from './viewModels'
+import { AlphaexploraLandingViewModel, useViewModel } from './viewModels'
 
 function useAnimatedNumber(target) {
   const [value, setValue] = useState(target)
@@ -101,7 +101,7 @@ function PricingCard({ plan, pricingMode, displayedPrice, isSelected, onSelect }
 }
 
 function App() {
-  const { vm, state } = useViewModel(NexusLandingViewModel)
+  const { vm, state } = useViewModel(AlphaexploraLandingViewModel)
   const unlockedRef = useRef(null)
   const waitlistRef = useRef(null)
 
@@ -166,10 +166,10 @@ function App() {
   }
 
   return (
-    <div className="nexus-page">
+    <div className="alphaexplora-page">
       <nav>
         <div className="nav-logo">
-          Nexus<span>.</span>
+          Alphaexplora<span>.</span>
         </div>
         <ul className="nav-links">
           <li>
@@ -205,7 +205,7 @@ function App() {
           <span className="accent">modern enterprises.</span>
         </h1>
         <p className="hero-sub fade-up">
-          Nexus unifies your workflows, data, and teams in a single intelligent
+          Alphaexplora unifies your workflows, data, and teams in a single intelligent
           platform. Built for organizations that cannot afford to slow down.
         </p>
 
@@ -250,7 +250,7 @@ function App() {
             nothing it does not.
           </h2>
           <p className="section-sub">
-            Nexus was built from the ground up for the way complex organizations
+            Alphaexplora was built from the ground up for the way complex organizations
             actually work - asynchronously, globally, and at scale.
           </p>
         </div>
@@ -458,10 +458,10 @@ function App() {
 
       <footer>
         <div className="footer-logo">
-          Nexus<span>.</span>
+          Alphaexplora<span>.</span>
         </div>
         <p className="footer-copy">
-          Copyright {new Date().getFullYear()} Nexus Technologies, Inc. All rights reserved.
+          Copyright {new Date().getFullYear()} Alphaexplora Technologies, Inc. All rights reserved.
         </p>
         <ul className="footer-links">
           <li>

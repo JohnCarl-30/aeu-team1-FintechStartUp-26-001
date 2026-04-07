@@ -1,28 +1,28 @@
 import { BaseViewModel } from './BaseViewModel'
 import {
-  NexusFeature,
-  NexusPlan,
-  NexusStat,
-  NexusTestimonial,
+  AlphaexploraFeature,
+  AlphaexploraPlan,
+  AlphaexploraStat,
+  AlphaexploraTestimonial,
 } from '../models'
 import {
   getLandingPageContent,
   normalizeEmail,
   submitWaitlistEmail,
-} from '../services/nexusService'
+} from '../services/alphaexploraService'
 
-export class NexusLandingViewModel extends BaseViewModel {
+export class AlphaexploraLandingViewModel extends BaseViewModel {
   constructor() {
     const content = getLandingPageContent()
 
     super({
       pageTitle: content.pageTitle,
-      stats: NexusStat.fromJSONArray(content.stats),
+      stats: AlphaexploraStat.fromJSONArray(content.stats),
       logos: content.logos,
-      features: NexusFeature.fromJSONArray(content.features),
-      unlockedFeatures: NexusFeature.fromJSONArray(content.unlockedFeatures),
-      plans: NexusPlan.fromJSONArray(content.plans),
-      testimonials: NexusTestimonial.fromJSONArray(content.testimonials),
+      features: AlphaexploraFeature.fromJSONArray(content.features),
+      unlockedFeatures: AlphaexploraFeature.fromJSONArray(content.unlockedFeatures),
+      plans: AlphaexploraPlan.fromJSONArray(content.plans),
+      testimonials: AlphaexploraTestimonial.fromJSONArray(content.testimonials),
       pricingMode: 'monthly',
       selectedPlan: null,
       currentSlide: 0,

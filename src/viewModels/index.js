@@ -1,5 +1,5 @@
 export { BaseViewModel } from './BaseViewModel'
-export { NexusLandingViewModel } from './NexusLandingViewModel'
+export { AlphaexploraLandingViewModel } from './AlphaexploraLandingViewModel'
 export { TransactionViewModel } from './TransactionViewModel'
 export { UserViewModel } from './UserViewModel'
 export { useViewModel } from './useViewModel'
