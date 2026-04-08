@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import './App.css'
 import { AlphaexploraLandingView } from './views/AlphaexploraLandingView'
 
 function App() {
