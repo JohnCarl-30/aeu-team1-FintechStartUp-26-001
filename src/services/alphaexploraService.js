@@ -1,4 +1,3 @@
-import { supabase } from '../database/supabase'
 
 const landingPageContent = {
   pageTitle: 'Alphaexplora - Enterprise Software Platform',
@@ -179,42 +178,24 @@ export async function submitWaitlistEmail(email) {
   }
 
   try {
-    // 1. Check if email already exists in Supabase
-    const { data: existing, error: fetchError } = await supabase
-      .from('waitlist')
-      .select('email')
-      .eq('email', normalizedEmail)
-      .single()
+    const response = await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: normalizedEmail }),
+    })
 
-    if (fetchError && fetchError.code !== 'PGRST116') {
-      // PGRST116 means no rows found, which is what we want
-      throw fetchError
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to join waitlist. Please try again.')
     }
 
-    if (existing) {
-      throw new Error(
-        'This email is already registered. Check your inbox for your invite details.',
-      )
-    }
-
-    // 2. Insert new email
-    const { error: insertError } = await supabase
-      .from('waitlist')
-      .insert([{ email: normalizedEmail }])
-
-    if (insertError) {
-      throw insertError
-    }
-
-    return { email: normalizedEmail }
+    return { email: data.email }
   } catch (error) {
-    console.error('Supabase Error:', error)
-
-    // Handle unique constraint violation (just in case the check above missed it)
-    if (error.code === '23505') {
-      throw new Error('This email is already registered.')
-    }
-
+    console.error('Waitlist API Error:', error)
+    
     throw new Error(
       error instanceof Error
         ? error.message
