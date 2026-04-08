@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { AlphaexploraLandingViewModel, useViewModel } from '../viewModels'
 
 function useAnimatedNumber(target) {
@@ -193,21 +193,21 @@ export function AlphaexploraLandingView() {
         </Link>
         <ul className="flex gap-8 list-none max-md:hidden">
           <li>
-            <a href="#features" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Features</a>
+            <NavLink to="/features" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Features</NavLink>
           </li>
           <li>
-            <a href="#pricing" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Pricing</a>
+            <NavLink to="/pricing" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Pricing</NavLink>
           </li>
           <li>
-            <a href="#testimonials" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Testimonials</a>
+            <NavLink to="/testimonials" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Testimonials</NavLink>
           </li>
           <li>
-            <a href="#waitlist" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Waitlist</a>
+            <NavLink to="/waitlist" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Waitlist</NavLink>
           </li>
         </ul>
-        <a href="#waitlist" className="bg-brand-accent text-[#052e16] font-body text-sm font-medium py-2.5 px-5 rounded-brand-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-[1px]">
+        <NavLink to="/waitlist" className="bg-brand-accent text-[#052e16] font-body text-sm font-medium py-2.5 px-5 rounded-brand-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-[1px]">
           Join Beta
-        </a>
+        </NavLink>
       </nav>
 
       <header className="min-h-screen flex flex-col items-center justify-center text-center pt-32 pb-16 px-8 relative overflow-hidden max-md:px-4">
@@ -231,12 +231,12 @@ export function AlphaexploraLandingView() {
         </p>
 
         <div className="relative flex gap-4 flex-wrap justify-center mb-16 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:200ms] max-sm:w-full max-sm:flex-col">
-          <a href="#waitlist" className="bg-brand-accent text-[#052e16] font-body text-[15px] font-semibold py-3.5 px-7 rounded-brand-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-[1px] max-sm:w-full">
+          <NavLink to="/waitlist" className="bg-brand-accent text-[#052e16] font-body text-[15px] font-semibold py-3.5 px-7 rounded-brand-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-[1px] max-sm:w-full">
             Get early access
-          </a>
-          <a href="#features" className="bg-transparent text-brand-text border border-brand-border2 font-body text-[15px] font-semibold py-3.5 px-7 rounded-brand-sm transition-all duration-200 hover:bg-brand-bg4 hover:-translate-y-[2px] max-sm:w-full">
+          </NavLink>
+          <NavLink to="/features" className="bg-transparent text-brand-text border border-brand-border2 font-body text-[15px] font-semibold py-3.5 px-7 rounded-brand-sm transition-all duration-200 hover:bg-brand-bg4 hover:-translate-y-[2px] max-sm:w-full">
             Explore features
-          </a>
+          </NavLink>
         </div>
 
         <div className="relative p-8 flex flex-col items-center gap-6 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:300ms]">
@@ -489,16 +489,16 @@ export function AlphaexploraLandingView() {
         </p>
         <ul className="flex gap-8 list-none max-sm:flex-col max-sm:gap-4">
           <li>
-            <a href="#" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Privacy</a>
+            <NavLink to="/privacy" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Privacy</NavLink>
           </li>
           <li>
-            <a href="#" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Terms</a>
+            <NavLink to="/terms" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Terms</NavLink>
           </li>
           <li>
-            <a href="#" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Security</a>
+            <NavLink to="/security" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Security</NavLink>
           </li>
           <li>
-            <a href="#" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Status</a>
+            <NavLink to="/status" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Status</NavLink>
           </li>
         </ul>
       </footer>
