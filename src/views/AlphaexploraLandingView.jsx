@@ -116,10 +116,17 @@ export function AlphaexploraLandingView() {
     <div className="bg-brand-bg text-brand-text min-h-screen">
       <nav className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-brand-border bg-[rgba(15,23,42,0.72)] px-8 backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards] max-md:px-4">
         <div className="mx-auto flex h-full max-w-[1280px] items-center justify-between gap-6">
-        <Link to="/" className="font-head tracking-[-0.02em] text-[1.4rem] font-extrabold">
-          Alphaexplora<span className="text-brand-accent">.</span>
-        </Link>
-        <ul className="flex gap-8 list-none max-md:hidden">
+          <div className="flex items-center gap-3">
+            <Link to="/" className="font-head tracking-[-0.02em] text-[1.4rem] font-extrabold shrink-0">
+              Alphaexplora<span className="text-brand-accent">.</span>
+            </Link>
+            {state.subscriptionStatus.hasActiveSubscription && (
+              <div className="rounded-full bg-brand-accent-dim2 border border-brand-accent/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-accent animate-in fade-in zoom-in duration-500">
+                Premium
+              </div>
+            )}
+          </div>
+          <ul className="flex gap-8 list-none max-md:hidden">
           {navigationItems.map((item) => (
             <li key={item.href}>
               <a href={item.href} className="text-brand-text2 text-sm tracking-[0.01em] transition-colors hover:text-brand-text">
@@ -147,7 +154,7 @@ export function AlphaexploraLandingView() {
             </div>
 
             <p className="mb-5 text-sm tracking-[0.12em] text-brand-text3 uppercase animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:80ms]">
-              Alphaexplora for revenue, operations, delivery, and leadership teams
+              For revenue, operations, and leadership teams
             </p>
 
             <h1 className="mb-6 max-w-[15ch] font-head text-[clamp(2.8rem,6vw,5.2rem)] font-extrabold leading-[1.0] tracking-[-0.05em] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:140ms]">
@@ -280,8 +287,7 @@ export function AlphaexploraLandingView() {
             clarity, speed, and control.
           </h2>
           <p className="text-[1.05rem] text-brand-text2 max-w-[520px] leading-[1.7]">
-            Alphaexplora was designed for the real rhythm of B2B teams:
-            cross-functional work, enterprise controls, and constant execution pressure.
+            Designed for the rhythm of B2B teams: clarity, control, and constant execution pressure.
           </p>
         </div>
 
@@ -296,16 +302,15 @@ export function AlphaexploraLandingView() {
           id="unlocked-section"
           className={`border-t border-brand-border mt-12 pt-12 ${vm.isUnlockedVisible ? 'block' : 'hidden'}`}
         >
-          <div className="inline-flex items-center gap-1.5 bg-[rgba(253,224,71,0.1)] border border-[rgba(253,224,71,0.25)] text-brand-amber text-[11px] font-semibold tracking-[0.08em] uppercase py-1 px-2.5 rounded-full mb-8">
-            Premium tier unlocked
+          <div className="inline-flex items-center gap-1.5 bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[11px] font-semibold tracking-[0.08em] uppercase py-1 px-3 rounded-full mb-8">
+            <div className="h-1.5 w-1.5 rounded-full bg-brand-accent animate-pulse"></div>
+            Premium tier active
           </div>
           <h3 className="font-head text-[1.6rem] font-bold tracking-[-0.02em] mb-5">
             Unlocked: Advanced Capabilities
           </h3>
           <p className="text-[1.05rem] text-brand-text2 max-w-[520px] leading-[1.7]">
-            These features appear only when an active paid subscription is set to
-            monthly or annual. You are currently viewing them because the selected
-            plan is in the premium tier.
+            Advanced capabilities now active for your organization.
           </p>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4 mt-8">
             {state.unlockedFeatures.map((feature) => (
@@ -426,8 +431,7 @@ export function AlphaexploraLandingView() {
           <div className="text-brand-accent text-xs tracking-[0.08em] uppercase font-medium mb-4">Private beta access</div>
           <h2 className="font-head text-[clamp(1.8rem,4vw,3rem)] font-bold tracking-[-0.02em] leading-[1.15] mb-5">Join the beta before public launch.</h2>
           <p className="text-[1.05rem] text-brand-text2 max-w-[520px] leading-[1.7] mx-auto">
-            Qualified teams get founding pricing, a dedicated onboarding session,
-            and direct access to the product team during rollout.
+            Get founding pricing and dedicated onboarding.
           </p>
 
           <div className="mt-12">
@@ -480,7 +484,7 @@ export function AlphaexploraLandingView() {
           Alphaexplora<span className="text-brand-accent">.</span>
         </Link>
         <p className="text-[13px] text-brand-text3">
-          Copyright {new Date().getFullYear()} Alphaexplora Technologies, Inc. All rights reserved.
+          © {new Date().getFullYear()} Alphaexplora.
         </p>
         <ul className="flex gap-8 list-none max-sm:flex-col max-sm:gap-4">
           {navigationItems.map((item) => (
