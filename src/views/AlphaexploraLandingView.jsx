@@ -83,13 +83,7 @@ export function AlphaexploraLandingView() {
     return () => observer.disconnect()
   }, [state.selectedPlan])
 
-  useEffect(() => {
-    vm.startAutoSlide()
 
-    return () => {
-      vm.stopAutoSlide()
-    }
-  }, [vm])
 
   useEffect(() => {
     if (!state.scrollTarget) {
@@ -305,8 +299,6 @@ export function AlphaexploraLandingView() {
 
         <div
           className="relative overflow-hidden reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out"
-          onMouseEnter={() => vm.setSliderPaused(true)}
-          onMouseLeave={() => vm.setSliderPaused(false)}
         >
           <div
             className="flex transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
