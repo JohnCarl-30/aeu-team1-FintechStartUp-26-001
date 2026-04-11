@@ -407,22 +407,54 @@ export function AlphaexploraLandingView() {
         </div>
       </section>
 
-      <footer className="py-12 px-8 max-w-[1200px] mx-auto border-t border-brand-border flex justify-between items-center flex-wrap gap-4 max-sm:flex-col max-sm:text-center">
-        <Link to="/" className="font-head text-[1.2rem] font-extrabold tracking-[-0.02em]">
-          Alphaexplora<span className="text-brand-accent">.</span>
-        </Link>
-        <p className="text-[13px] text-brand-text3">
-          © {new Date().getFullYear()} Alphaexplora.
-        </p>
-        <ul className="flex gap-8 list-none max-sm:flex-col max-sm:gap-4">
-          {navigationItems.map((item) => (
-            <li key={item.href}>
-              <a href={item.href} className="text-[13px] text-brand-text3 transition-colors hover:text-brand-text">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <footer className="py-20 px-8 max-w-[1280px] mx-auto border-t border-brand-border">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div className="col-span-1 md:col-span-1">
+            <Link to="/" className="font-head text-[1.4rem] font-extrabold tracking-[-0.02em] block mb-6">
+              Alphaexplora<span className="text-brand-accent">.</span>
+            </Link>
+            <p className="text-[13px] text-brand-text2 leading-relaxed">
+              The command layer for high-performance B2B operations.
+            </p>
+          </div>
+          
+          <div>
+            <h4 className="font-head text-sm font-bold uppercase tracking-wider mb-6 text-brand-text">Company</h4>
+            <ul className="space-y-4 list-none p-0">
+              <li><a href="#about" className="text-[14px] text-brand-text2 hover:text-brand-accent transition-colors">About Us</a></li>
+              <li><a href="#features" className="text-[14px] text-brand-text2 hover:text-brand-accent transition-colors">Features</a></li>
+              <li><a href="#pricing" className="text-[14px] text-brand-text2 hover:text-brand-accent transition-colors">Pricing</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-head text-sm font-bold uppercase tracking-wider mb-6 text-brand-text">Contact</h4>
+            <ul className="space-y-4 list-none p-0">
+              <li className="text-[14px] text-brand-text2">contact@alphaexplora.com</li>
+              <li className="text-[14px] text-brand-text2">+1 (555) 000-1234</li>
+              <li><a href="#waitlist" className="text-[14px] text-brand-text2 hover:text-brand-accent transition-colors">Support</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-head text-sm font-bold uppercase tracking-wider mb-6 text-brand-text">Location</h4>
+            <p className="text-[14px] text-brand-text2 leading-relaxed">
+              101 California Street,<br />
+              Suite 2710,<br />
+              San Francisco, CA 94111
+            </p>
+          </div>
+        </div>
+
+        <div className="pt-8 border-t border-brand-border flex justify-between items-center flex-wrap gap-4">
+          <p className="text-[13px] text-brand-text3">
+            © {new Date().getFullYear()} Alphaexplora. All rights reserved.
+          </p>
+          <div className="flex gap-8">
+            <a href="#" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Privacy Policy</a>
+            <a href="#" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Terms of Service</a>
+          </div>
+        </div>
       </footer>
     </div>
   )
