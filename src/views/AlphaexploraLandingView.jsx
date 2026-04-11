@@ -146,8 +146,8 @@ export function AlphaexploraLandingView() {
         <div className="pointer-events-none absolute right-[8%] top-[12%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(110,231,183,0.22)_0%,transparent_68%)] blur-2xl"></div>
         <div className="pointer-events-none absolute left-[8%] top-[18%] h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.14)_0%,transparent_72%)] blur-3xl"></div>
 
-        <div className="relative mx-auto grid min-h-[calc(100vh-4rem)] max-w-[1280px] items-center gap-12 lg:gap-20 py-14 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="max-w-[680px]">
+        <div className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-[1280px] flex-col items-center justify-center text-center py-14">
+          <div className="max-w-[800px] flex flex-col items-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(110,231,183,0.28)] bg-brand-accent-dim2 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent animate-fade-up opacity-0 [animation-fill-mode:forwards]">
               <div className="h-1.5 w-1.5 rounded-full bg-brand-accent animate-[pulse_2.6s_infinite]"></div>
               Private beta for B2B operators
@@ -165,16 +165,16 @@ export function AlphaexploraLandingView() {
               Unify your workflows, reporting, and execution in one shared source of truth.
             </p>
 
-            <div className="mb-10 flex flex-wrap gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:300ms] max-sm:flex-col">
+            <div className="mb-10 flex flex-wrap justify-center gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:300ms] max-sm:flex-col">
               <a href="#waitlist" className="rounded-brand-sm bg-brand-accent px-7 py-3.5 text-[15px] font-semibold text-[#052e16] transition-all duration-200 hover:-translate-y-[1px] hover:opacity-90 max-sm:w-full max-sm:text-center">
                 Join Beta
               </a>
               <a href="#features" className="rounded-brand-sm border border-brand-border2 bg-transparent px-7 py-3.5 text-[15px] font-semibold text-brand-text transition-all duration-200 hover:-translate-y-[2px] hover:bg-brand-bg4 max-sm:w-full max-sm:text-center">
-                See Platform Capabilities
+                See features
               </a>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-3 animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:380ms]">
+            <div className="grid gap-8 sm:grid-cols-3 animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:380ms] text-left">
               {heroPillars.map((pillar) => (
                 <article key={pillar.title} className="border-l border-brand-border pl-4">
                   <h2 className="mb-1.5 font-head text-[1rem] font-semibold tracking-[-0.02em] text-brand-text">
@@ -191,76 +191,12 @@ export function AlphaexploraLandingView() {
               <p className="mb-5 text-xs uppercase tracking-[0.12em] text-brand-text3">
                 Teams evaluating Alphaexplora today
               </p>
-              <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
+              <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
                 {state.logos.map((logo) => (
                   <div key={logo} className="font-head text-[1.05rem] font-bold text-brand-text3 opacity-60 transition-opacity duration-200 hover:opacity-90">
                     {logo}
                   </div>
                 ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="relative animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:260ms]">
-            <div className="absolute inset-0 rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(110,231,183,0.16),transparent_58%)] blur-2xl"></div>
-            <div className="relative overflow-hidden rounded-[32px] border border-brand-border bg-[linear-gradient(180deg,rgba(8,18,31,0.96),rgba(15,23,42,0.86))] p-8 shadow-[0_30px_90px_rgba(2,6,23,0.5)] sm:p-10">
-              <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(110,231,183,0.7),transparent)]"></div>
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.12em] text-brand-accent">Live operating pulse</p>
-                  <p className="mt-2 max-w-[260px] font-head text-[1.35rem] font-bold leading-[1.15] tracking-[-0.03em]">
-                    Visibility, control, and execution in one place.
-                  </p>
-                </div>
-                <div className="rounded-full border border-[rgba(110,231,183,0.24)] bg-brand-accent-dim px-3 py-1 text-[11px] uppercase tracking-[0.1em] text-brand-accent">
-                  Enterprise-ready
-                </div>
-              </div>
-
-              <div className="mt-10 grid gap-3 sm:grid-cols-3">
-                {state.stats.slice(0, 3).map((stat) => (
-                  <div key={stat.label} className="rounded-[22px] border border-brand-border bg-[rgba(255,255,255,0.02)] p-4">
-                    <div className="font-head text-[2rem] font-extrabold tracking-[-0.04em] text-brand-text">
-                      {stat.value}
-                    </div>
-                    <div className="mt-1 text-sm leading-[1.5] text-brand-text2">
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 space-y-4">
-                {operatingSignals.map((signal, index) => (
-                  <div key={signal.title} className="grid items-start gap-4 border-t border-brand-border pt-4 sm:grid-cols-[auto_1fr_auto] sm:items-center">
-                    <div className="mt-1.5 h-2.5 w-2.5 rounded-full bg-brand-accent shadow-[0_0_16px_rgba(110,231,183,0.7)] animate-[pulse_3s_ease-in-out_infinite] sm:mt-0" style={{ animationDelay: `${index * 120}ms` }}></div>
-                    <div>
-                      <p className="font-head text-[1rem] font-semibold tracking-[-0.02em] text-brand-text">
-                        {signal.title}
-                      </p>
-                      <p className="mt-1 text-sm leading-[1.6] text-brand-text2">
-                        {signal.description}
-                      </p>
-                    </div>
-                    <div className="text-[11px] uppercase tracking-[0.12em] text-brand-accent">
-                      {signal.status}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 grid gap-5 border-t border-brand-border pt-6 md:grid-cols-[1fr_auto] md:items-end">
-                <div>
-                  <p className="font-head text-[1.2rem] font-bold tracking-[-0.03em] text-brand-text">
-                    Board-ready visibility without adding another layer of tools.
-                  </p>
-                  <p className="mt-2 max-w-[420px] text-sm leading-[1.7] text-brand-text2">
-                    Deploy once, align every team, and keep leadership operating from live data.
-                  </p>
-                </div>
-                <a href="#pricing" className="rounded-full border border-brand-border2 px-4 py-2 text-sm font-medium text-brand-text transition-colors duration-200 hover:border-brand-accent hover:text-brand-accent">
-                  View pricing
-                </a>
               </div>
             </div>
           </div>
