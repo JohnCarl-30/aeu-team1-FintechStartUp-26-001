@@ -6,14 +6,21 @@ import {
   AlphaexploraTestimonial,
 } from '../models'
 import {
+  createSubscriptionSnapshot,
+  fetchSubscriptionState,
   getLandingPageContent,
   normalizeEmail,
   submitWaitlistEmail,
+  updateSubscriptionState,
 } from '../services/alphaexploraService'
 
 export class AlphaexploraLandingViewModel extends BaseViewModel {
   constructor() {
     const content = getLandingPageContent()
+    const initialSubscription = createSubscriptionSnapshot({
+      planName: 'Business',
+      billingCycle: 'monthly',
+    })
 
     super({
       pageTitle: content.pageTitle,
@@ -23,8 +30,12 @@ export class AlphaexploraLandingViewModel extends BaseViewModel {
       unlockedFeatures: AlphaexploraFeature.fromJSONArray(content.unlockedFeatures),
       plans: AlphaexploraPlan.fromJSONArray(content.plans),
       testimonials: AlphaexploraTestimonial.fromJSONArray(content.testimonials),
-      pricingMode: 'monthly',
-      selectedPlan: 'Business',
+      pricingMode: initialSubscription.billingCycle,
+      selectedPlan: initialSubscription.planName,
+      subscriptionStatus: initialSubscription,
+      isSubscriptionLoading: false,
+      isSubscriptionSaving: false,
+      subscriptionError: '',
       currentSlide: 0,
       isSliderPaused: false,
       email: '',
@@ -39,33 +50,105 @@ export class AlphaexploraLandingViewModel extends BaseViewModel {
   }
 
   get isUnlockedVisible() {
-    return (
-      this.state.selectedPlan === 'Business' ||
-      this.state.selectedPlan === 'Enterprise'
-    )
+    return this.state.subscriptionStatus.hasActiveSubscription
   }
 
   getPlanByName(planName) {
     return this.state.plans.find((plan) => plan.name === planName) ?? null
   }
 
+  async loadSubscriptionState() {
+    this.setState({
+      isSubscriptionLoading: true,
+      subscriptionError: '',
+    })
+
+    try {
+      const subscriptionStatus = await fetchSubscriptionState()
+
+      this.setState({
+        pricingMode: subscriptionStatus.billingCycle,
+        selectedPlan: subscriptionStatus.planName,
+        subscriptionStatus,
+        isSubscriptionLoading: false,
+      })
+    } catch (error) {
+      this.setState({
+        isSubscriptionLoading: false,
+        subscriptionError:
+          error instanceof Error
+            ? error.message
+            : 'Unable to load subscription state.',
+      })
+    }
+  }
+
+  async syncSubscription(nextValues = {}, { shouldScroll = false } = {}) {
+    const nextPlanName = nextValues.planName ?? this.state.selectedPlan
+    const nextBillingCycle = nextValues.billingCycle ?? this.state.pricingMode
+    const nextSubscriptionStatus = createSubscriptionSnapshot({
+      planName: nextPlanName,
+      billingCycle: nextBillingCycle,
+    })
+    const previousState = {
+      pricingMode: this.state.pricingMode,
+      selectedPlan: this.state.selectedPlan,
+      subscriptionStatus: this.state.subscriptionStatus,
+      subscriptionError: this.state.subscriptionError,
+      scrollTarget: this.state.scrollTarget,
+    }
+
+    if (shouldScroll) {
+      this.scrollRequestId += 1
+    }
+
+    this.setState({
+      pricingMode: nextSubscriptionStatus.billingCycle,
+      selectedPlan: nextSubscriptionStatus.planName,
+      subscriptionStatus: nextSubscriptionStatus,
+      isSubscriptionSaving: true,
+      subscriptionError: '',
+      scrollTarget: shouldScroll
+        ? {
+            section: nextSubscriptionStatus.hasActiveSubscription
+              ? 'unlocked'
+              : 'waitlist',
+            id: this.scrollRequestId,
+          }
+        : this.state.scrollTarget,
+    })
+
+    try {
+      const subscriptionStatus = await updateSubscriptionState(nextSubscriptionStatus)
+
+      this.setState({
+        pricingMode: subscriptionStatus.billingCycle,
+        selectedPlan: subscriptionStatus.planName,
+        subscriptionStatus,
+        isSubscriptionSaving: false,
+      })
+
+      return true
+    } catch (error) {
+      this.setState({
+        ...previousState,
+        isSubscriptionSaving: false,
+        subscriptionError:
+          error instanceof Error
+            ? error.message
+            : 'Unable to update subscription state.',
+      })
+
+      return false
+    }
+  }
+
   setPricingMode(mode) {
-    this.setState({ pricingMode: mode })
+    return this.syncSubscription({ billingCycle: mode })
   }
 
   selectPlan(planName) {
-    this.scrollRequestId += 1
-
-    this.setState({
-      selectedPlan: planName,
-      scrollTarget: {
-        section:
-          planName === 'Business' || planName === 'Enterprise'
-            ? 'unlocked'
-            : 'waitlist',
-        id: this.scrollRequestId,
-      },
-    })
+    return this.syncSubscription({ planName }, { shouldScroll: true })
   }
 
   clearScrollTarget() {

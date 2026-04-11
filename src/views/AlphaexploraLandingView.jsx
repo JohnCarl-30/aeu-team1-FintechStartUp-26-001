@@ -1,128 +1,51 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { AlphaexploraLandingViewModel, useViewModel } from '../viewModels'
-
-function useAnimatedNumber(target) {
-  const [value, setValue] = useState(target)
-  const previousValueRef = useRef(target)
-
-  useEffect(() => {
-    const start = previousValueRef.current
-    const end = target
-
-    if (start === end) {
-      previousValueRef.current = end
-      return
-    }
-
-    let frameId = 0
-    let startTime = null
-    const duration = 240
-
-    const animate = (timestamp) => {
-      if (startTime === null) {
-        startTime = timestamp
-      }
-
-      const progress = Math.min((timestamp - startTime) / duration, 1)
-      const eased = 1 - (1 - progress) ** 3
-      const nextValue = Math.round(start + (end - start) * eased)
-
-      setValue(nextValue)
-
-      if (progress < 1) {
-        frameId = window.requestAnimationFrame(animate)
-      } else {
-        previousValueRef.current = end
-        setValue(end)
-      }
-    }
-
-    frameId = window.requestAnimationFrame(animate)
-
-    return () => window.cancelAnimationFrame(frameId)
-  }, [target])
-
-  return value
-}
-
-function FeatureCard({ feature }) {
-  return (
-    <article className="bg-brand-bg p-10 transition-colors duration-200 hover:bg-brand-bg2 max-sm:p-8">
-      <div className="w-11 h-11 bg-brand-accent-dim2 rounded-brand-sm text-[0.8rem] font-bold tracking-[0.08em] text-brand-accent mb-6 flex items-center justify-center" aria-hidden="true">
-        {feature.icon}
-      </div>
-      <h3 className="font-head text-[1.1rem] font-semibold mb-[0.6rem] tracking-[-0.01em]">{feature.title}</h3>
-      <p className="text-[14px] leading-relaxed text-brand-text2">{feature.description}</p>
-    </article>
-  )
-}
-
-function PricingCard({ plan, pricingMode, displayedPrice, isSelected, onSelect }) {
-  const isFeatured = plan.featured
-  
-  return (
-    <article
-      className={`
-        bg-brand-bg2 border border-brand-border rounded-brand p-10 relative transition-all duration-200
-        hover:-translate-y-1 max-sm:p-8
-        ${isFeatured ? 'bg-[linear-gradient(135deg,rgba(110,231,183,0.05),var(--color-brand-bg2))]' : ''}
-        ${isSelected ? 'bg-[rgba(110,231,183,0.1)] border-brand-accent shadow-[0_0_20px_rgba(110,231,183,0.15)] -translate-y-1 z-10' : ''}
-      `}
-    >
-      {isFeatured ? (
-        <div className="absolute -top-[13px] left-1/2 -translate-x-1/2 bg-brand-accent text-[#052e16] text-[11px] font-bold tracking-[0.08em] uppercase py-1 px-3.5 rounded-full">
-          Most popular
-        </div>
-      ) : null}
-      
-      <div className="font-head text-[1.1rem] font-bold tracking-[-0.01em] mb-2">{plan.name}</div>
-      <div className="text-[13px] mb-8 leading-relaxed text-brand-text2">{plan.description}</div>
-      
-      <div className="flex items-baseline gap-1 mb-2">
-        {plan.custom ? null : <span className="text-[1.2rem] text-brand-text2 font-head">$</span>}
-        <span className={`font-head font-extrabold leading-none tracking-[-0.03em] ${plan.custom ? 'text-[2.2rem] tracking-[-0.02em]' : 'text-5xl'}`}>
-          {plan.custom ? 'Custom' : displayedPrice}
-        </span>
-        {plan.custom ? null : (
-          <span className="text-[13px] text-brand-text2">
-            /{plan.name === 'Business' ? 'mo per seat' : 'mo'}
-          </span>
-        )}
-      </div>
-      
-      <div className="text-xs min-h-[20px] mb-8 text-brand-text2">{plan.getAnnualNote(pricingMode)}</div>
-      
-      <hr className="border-0 border-t border-brand-border my-6" />
-      
-      <ul className="mb-8">
-        {plan.features.map((item) => (
-          <li key={item} className="flex items-start gap-2.5 text-sm text-brand-text2 py-1.5">
-            <div className="w-[18px] h-[18px] bg-brand-accent-dim2 rounded-full shrink-0 flex items-center justify-center text-[10px] text-brand-accent mt-[1px]" aria-hidden="true">
-              &#10003;
-            </div>
-            {item}
-          </li>
-        ))}
-      </ul>
-      
-      <button
-        className={`w-full py-3 px-[28px] text-sm rounded-brand-sm font-semibold transition-all duration-200 cursor-pointer text-center disabled:opacity-50
-          ${isFeatured ? 'bg-brand-accent text-[#052e16] hover:opacity-90 hover:-translate-y-[1px]' : 'bg-transparent text-brand-text border border-brand-border2 hover:bg-brand-bg4 hover:-translate-y-[2px]'}
-        `}
-        type="button"
-        onClick={() => onSelect(plan.name)}
-      >
-        {plan.buttonLabel}
-      </button>
-    </article>
-  )
-}
+import { FeatureCard } from '../components/FeatureCard'
+import { PricingCard } from '../components/PricingCard'
+import { useAnimatedNumber } from '../hooks/useAnimatedNumber'
 
 export function AlphaexploraLandingView() {
   const { vm, state } = useViewModel(AlphaexploraLandingViewModel)
   const unlockedRef = useRef(null)
   const waitlistRef = useRef(null)
+  const navigationItems = [
+    { href: '#features', label: 'Features' },
+    { href: '#pricing', label: 'Pricing' },
+    { href: '#testimonials', label: 'Testimonials' },
+    { href: '#waitlist', label: 'Beta' },
+  ]
+  const heroPillars = [
+    {
+      title: 'One operating layer',
+      description: 'Unify approvals, reporting, and execution without stitching tools together.',
+    },
+    {
+      title: 'Built for serious teams',
+      description: 'Give RevOps, delivery, finance, and leadership one shared source of truth.',
+    },
+    {
+      title: 'Move with confidence',
+      description: 'Launch with AI automation, enterprise controls, and live visibility from day one.',
+    },
+  ]
+  const operatingSignals = [
+    {
+      title: 'Revenue, operations, and delivery stay aligned',
+      description: 'Workflows, escalations, and leadership updates sync in real time.',
+      status: 'Live',
+    },
+    {
+      title: 'Automations resolve routine work before it spreads',
+      description: 'Route approvals, summarize activity, and surface blockers without manual follow-up.',
+      status: 'Active',
+    },
+    {
+      title: 'Leaders get one dashboard for the whole business',
+      description: 'Forecasting, execution health, and service signals stay visible in a single view.',
+      status: 'Ready',
+    },
+  ]
 
   const starterPlan = vm.getPlanByName('Starter')
   const businessPlan = vm.getPlanByName('Business')
@@ -136,6 +59,10 @@ export function AlphaexploraLandingView() {
   useEffect(() => {
     document.title = state.pageTitle
   }, [state.pageTitle])
+
+  useEffect(() => {
+    vm.loadSubscriptionState()
+  }, [vm])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -187,72 +114,154 @@ export function AlphaexploraLandingView() {
 
   return (
     <div className="bg-brand-bg text-brand-text min-h-screen">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#09090b]/85 backdrop-blur-md border-b border-brand-border px-8 h-16 flex items-center justify-between max-md:px-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-brand-border bg-[rgba(15,23,42,0.72)] px-8 backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards] max-md:px-4">
+        <div className="mx-auto flex h-full max-w-[1280px] items-center justify-between gap-6">
         <Link to="/" className="font-head tracking-[-0.02em] text-[1.4rem] font-extrabold">
           Alphaexplora<span className="text-brand-accent">.</span>
         </Link>
         <ul className="flex gap-8 list-none max-md:hidden">
-          <li>
-            <NavLink to="/features" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Features</NavLink>
-          </li>
-          <li>
-            <NavLink to="/pricing" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Pricing</NavLink>
-          </li>
-          <li>
-            <NavLink to="/testimonials" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Testimonials</NavLink>
-          </li>
-          <li>
-            <NavLink to="/waitlist" className="text-brand-text2 text-sm tracking-[0.01em] hover:text-brand-text transition-colors">Waitlist</NavLink>
-          </li>
+          {navigationItems.map((item) => (
+            <li key={item.href}>
+              <a href={item.href} className="text-brand-text2 text-sm tracking-[0.01em] transition-colors hover:text-brand-text">
+                {item.label}
+              </a>
+            </li>
+          ))}
         </ul>
-        <NavLink to="/waitlist" className="bg-brand-accent text-[#052e16] font-body text-sm font-medium py-2.5 px-5 rounded-brand-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-[1px]">
+        <a href="#waitlist" className="rounded-brand-sm bg-brand-accent px-5 py-2.5 font-body text-sm font-semibold text-[#052e16] transition-all duration-200 hover:-translate-y-[1px] hover:opacity-90">
           Join Beta
-        </NavLink>
+        </a>
+        </div>
       </nav>
 
-      <header className="min-h-screen flex flex-col items-center justify-center text-center pt-32 pb-16 px-8 relative overflow-hidden max-md:px-4">
-        <div className="absolute inset-0 pointer-events-none bg-[length:64px_64px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_30%,transparent_100%)]" style={{ backgroundImage: 'linear-gradient(var(--color-brand-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-border) 1px, transparent 1px)' }}></div>
-        <div className="absolute pointer-events-none top-[20%] left-1/2 -translate-x-1/2 w-[min(70vw,600px)] h-[300px] bg-[radial-gradient(ellipse,rgba(110,231,183,0.12)_0%,transparent_70%)]"></div>
+      <header className="relative overflow-hidden px-8 pt-16 max-md:px-4">
+        <div className="pointer-events-none absolute inset-0 bg-[length:64px_64px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_45%,black_28%,transparent_100%)]" style={{ backgroundImage: 'linear-gradient(var(--color-brand-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-border) 1px, transparent 1px)' }}></div>
+        <div className="pointer-events-none absolute right-[8%] top-[12%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(110,231,183,0.22)_0%,transparent_68%)] blur-2xl"></div>
+        <div className="pointer-events-none absolute left-[8%] top-[18%] h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.14)_0%,transparent_72%)] blur-3xl"></div>
 
-        <div className="relative inline-flex items-center gap-2 bg-brand-accent-dim2 border border-[rgba(110,231,183,0.3)] text-brand-accent text-xs font-medium tracking-[0.08em] uppercase py-1.5 px-3.5 rounded-full mb-8 animate-fade-up opacity-0 [animation-fill-mode:forwards]">
-          <div className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-[pulse_2s_infinite]"></div>
-          Now in limited beta - 500 spots remaining
-        </div>
+        <div className="relative mx-auto grid min-h-[calc(100vh-4rem)] max-w-[1280px] items-center gap-12 lg:gap-20 py-14 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="max-w-[680px]">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(110,231,183,0.28)] bg-brand-accent-dim2 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent animate-fade-up opacity-0 [animation-fill-mode:forwards]">
+              <div className="h-1.5 w-1.5 rounded-full bg-brand-accent animate-[pulse_2.6s_infinite]"></div>
+              Private beta for B2B operators
+            </div>
 
-        <h1 className="relative font-head text-[clamp(2.8rem,6vw,5.5rem)] font-extrabold leading-[1.05] tracking-[-0.03em] mb-6 max-w-[900px] animate-fade-up opacity-0 [animation-fill-mode:forwards]">
-          The operating system for
-          <br />
-          <span className="text-brand-accent">modern enterprises.</span>
-        </h1>
-        
-        <p className="relative font-body text-[clamp(1rem,2vw,1.2rem)] text-brand-text2 max-w-[560px] leading-[1.7] mb-12 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:100ms]">
-          Alphaexplora unifies your workflows, data, and teams in a single intelligent
-          platform. Built for organizations that cannot afford to slow down.
-        </p>
+            <p className="mb-5 text-sm tracking-[0.12em] text-brand-text3 uppercase animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:80ms]">
+              Alphaexplora for revenue, operations, delivery, and leadership teams
+            </p>
 
-        <div className="relative flex gap-4 flex-wrap justify-center mb-16 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:200ms] max-sm:w-full max-sm:flex-col">
-          <NavLink to="/waitlist" className="bg-brand-accent text-[#052e16] font-body text-[15px] font-semibold py-3.5 px-7 rounded-brand-sm transition-all duration-200 hover:opacity-90 hover:-translate-y-[1px] max-sm:w-full">
-            Get early access
-          </NavLink>
-          <NavLink to="/features" className="bg-transparent text-brand-text border border-brand-border2 font-body text-[15px] font-semibold py-3.5 px-7 rounded-brand-sm transition-all duration-200 hover:bg-brand-bg4 hover:-translate-y-[2px] max-sm:w-full">
-            Explore features
-          </NavLink>
-        </div>
+            <h1 className="mb-6 max-w-[15ch] font-head text-[clamp(2.8rem,6vw,5.2rem)] font-extrabold leading-[1.0] tracking-[-0.05em] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:140ms]">
+              One command layer for your B2B operation.
+            </h1>
 
-        <div className="relative p-8 flex flex-col items-center gap-6 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:300ms]">
-          <p className="text-xs tracking-[0.08em] uppercase text-brand-text3">Trusted by forward-thinking companies</p>
-          <div className="flex gap-12 items-center flex-wrap justify-center">
-            {state.logos.map((logo) => (
-              <div key={logo} className="font-head text-[1.1rem] font-bold text-brand-text3 opacity-50 hover:opacity-80 transition-opacity duration-200">
-                {logo}
+            <p className="mb-10 max-w-[580px] text-[clamp(1rem,1.5vw,1.15rem)] leading-[1.7] text-brand-text2 animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:220ms]">
+              Unify your workflows, reporting, and execution in one shared source of truth.
+            </p>
+
+            <div className="mb-10 flex flex-wrap gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:300ms] max-sm:flex-col">
+              <a href="#waitlist" className="rounded-brand-sm bg-brand-accent px-7 py-3.5 text-[15px] font-semibold text-[#052e16] transition-all duration-200 hover:-translate-y-[1px] hover:opacity-90 max-sm:w-full max-sm:text-center">
+                Join Beta
+              </a>
+              <a href="#features" className="rounded-brand-sm border border-brand-border2 bg-transparent px-7 py-3.5 text-[15px] font-semibold text-brand-text transition-all duration-200 hover:-translate-y-[2px] hover:bg-brand-bg4 max-sm:w-full max-sm:text-center">
+                See Platform Capabilities
+              </a>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-3 animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:380ms]">
+              {heroPillars.map((pillar) => (
+                <article key={pillar.title} className="border-l border-brand-border pl-4">
+                  <h2 className="mb-1.5 font-head text-[1rem] font-semibold tracking-[-0.02em] text-brand-text">
+                    {pillar.title}
+                  </h2>
+                  <p className="text-sm leading-[1.65] text-brand-text2">
+                    {pillar.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-10 border-t border-brand-border pt-8 animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:460ms]">
+              <p className="mb-5 text-xs uppercase tracking-[0.12em] text-brand-text3">
+                Teams evaluating Alphaexplora today
+              </p>
+              <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
+                {state.logos.map((logo) => (
+                  <div key={logo} className="font-head text-[1.05rem] font-bold text-brand-text3 opacity-60 transition-opacity duration-200 hover:opacity-90">
+                    {logo}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+          </div>
+
+          <div className="relative animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:260ms]">
+            <div className="absolute inset-0 rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(110,231,183,0.16),transparent_58%)] blur-2xl"></div>
+            <div className="relative overflow-hidden rounded-[32px] border border-brand-border bg-[linear-gradient(180deg,rgba(8,18,31,0.96),rgba(15,23,42,0.86))] p-8 shadow-[0_30px_90px_rgba(2,6,23,0.5)] sm:p-10">
+              <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(110,231,183,0.7),transparent)]"></div>
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.12em] text-brand-accent">Live operating pulse</p>
+                  <p className="mt-2 max-w-[260px] font-head text-[1.35rem] font-bold leading-[1.15] tracking-[-0.03em]">
+                    Visibility, control, and execution in one place.
+                  </p>
+                </div>
+                <div className="rounded-full border border-[rgba(110,231,183,0.24)] bg-brand-accent-dim px-3 py-1 text-[11px] uppercase tracking-[0.1em] text-brand-accent">
+                  Enterprise-ready
+                </div>
+              </div>
+
+              <div className="mt-10 grid gap-3 sm:grid-cols-3">
+                {state.stats.slice(0, 3).map((stat) => (
+                  <div key={stat.label} className="rounded-[22px] border border-brand-border bg-[rgba(255,255,255,0.02)] p-4">
+                    <div className="font-head text-[2rem] font-extrabold tracking-[-0.04em] text-brand-text">
+                      {stat.value}
+                    </div>
+                    <div className="mt-1 text-sm leading-[1.5] text-brand-text2">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 space-y-4">
+                {operatingSignals.map((signal, index) => (
+                  <div key={signal.title} className="grid items-start gap-4 border-t border-brand-border pt-4 sm:grid-cols-[auto_1fr_auto] sm:items-center">
+                    <div className="mt-1.5 h-2.5 w-2.5 rounded-full bg-brand-accent shadow-[0_0_16px_rgba(110,231,183,0.7)] animate-[pulse_3s_ease-in-out_infinite] sm:mt-0" style={{ animationDelay: `${index * 120}ms` }}></div>
+                    <div>
+                      <p className="font-head text-[1rem] font-semibold tracking-[-0.02em] text-brand-text">
+                        {signal.title}
+                      </p>
+                      <p className="mt-1 text-sm leading-[1.6] text-brand-text2">
+                        {signal.description}
+                      </p>
+                    </div>
+                    <div className="text-[11px] uppercase tracking-[0.12em] text-brand-accent">
+                      {signal.status}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 grid gap-5 border-t border-brand-border pt-6 md:grid-cols-[1fr_auto] md:items-end">
+                <div>
+                  <p className="font-head text-[1.2rem] font-bold tracking-[-0.03em] text-brand-text">
+                    Board-ready visibility without adding another layer of tools.
+                  </p>
+                  <p className="mt-2 max-w-[420px] text-sm leading-[1.7] text-brand-text2">
+                    Deploy once, align every team, and keep leadership operating from live data.
+                  </p>
+                </div>
+                <a href="#pricing" className="rounded-full border border-brand-border2 px-4 py-2 text-sm font-medium text-brand-text transition-colors duration-200 hover:border-brand-accent hover:text-brand-accent">
+                  View pricing
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="bg-brand-bg2 py-12 px-8 border-t border-brand-border">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-12 text-center">
+      <div className="border-y border-brand-border bg-[rgba(15,23,42,0.72)] px-8 py-10 backdrop-blur-md">
+        <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-12 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           {state.stats.map((stat) => (
             <div key={stat.label}>
               <div className="font-head text-[2.8rem] font-extrabold tracking-[-0.03em] text-brand-text mb-1">{stat.value}</div>
@@ -264,15 +273,15 @@ export function AlphaexploraLandingView() {
 
       <section id="features" className="py-24 px-8 max-w-[1200px] mx-auto border-t border-brand-border">
         <div className="mb-16 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          <div className="text-brand-accent text-xs tracking-[0.08em] uppercase font-medium mb-4">Core platform</div>
+          <div className="text-brand-accent text-xs tracking-[0.08em] uppercase font-medium mb-4">Platform capabilities</div>
           <h2 className="font-head text-[clamp(1.8rem,4vw,3rem)] font-bold tracking-[-0.02em] leading-[1.15] mb-5">
-            Everything your enterprise needs,
+            Built for operators who need
             <br />
-            nothing it does not.
+            clarity, speed, and control.
           </h2>
           <p className="text-[1.05rem] text-brand-text2 max-w-[520px] leading-[1.7]">
-            Alphaexplora was built from the ground up for the way complex organizations
-            actually work - asynchronously, globally, and at scale.
+            Alphaexplora was designed for the real rhythm of B2B teams:
+            cross-functional work, enterprise controls, and constant execution pressure.
           </p>
         </div>
 
@@ -288,15 +297,15 @@ export function AlphaexploraLandingView() {
           className={`border-t border-brand-border mt-12 pt-12 ${vm.isUnlockedVisible ? 'block' : 'hidden'}`}
         >
           <div className="inline-flex items-center gap-1.5 bg-[rgba(253,224,71,0.1)] border border-[rgba(253,224,71,0.25)] text-brand-amber text-[11px] font-semibold tracking-[0.08em] uppercase py-1 px-2.5 rounded-full mb-8">
-            Business plan - exclusive features
+            Premium tier unlocked
           </div>
           <h3 className="font-head text-[1.6rem] font-bold tracking-[-0.02em] mb-5">
             Unlocked: Advanced Capabilities
           </h3>
           <p className="text-[1.05rem] text-brand-text2 max-w-[520px] leading-[1.7]">
-            These features are available exclusively on Business and above.
-            You are seeing them because you chose a plan built for serious
-            organizations.
+            These features appear only when an active paid subscription is set to
+            monthly or annual. You are currently viewing them because the selected
+            plan is in the premium tier.
           </p>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4 mt-8">
             {state.unlockedFeatures.map((feature) => (
@@ -319,22 +328,7 @@ export function AlphaexploraLandingView() {
           </p>
         </div>
 
-        <div className="inline-flex bg-brand-bg3 border border-brand-border rounded-full p-1 mb-12" role="tablist" aria-label="Billing mode">
-          <button
-            className={`py-2 px-5 rounded-full border-0 font-body text-sm font-medium transition-all duration-200 ${state.pricingMode === 'monthly' ? 'bg-brand-bg text-brand-text shadow-sm' : 'bg-transparent text-brand-text2'}`}
-            type="button"
-            onClick={() => vm.setPricingMode('monthly')}
-          >
-            Monthly
-          </button>
-          <button
-            className={`flex items-center py-2 px-5 rounded-full border-0 font-body text-sm font-medium transition-all duration-200 ${state.pricingMode === 'annual' ? 'bg-brand-bg text-brand-text shadow-sm' : 'bg-transparent text-brand-text2'}`}
-            type="button"
-            onClick={() => vm.setPricingMode('annual')}
-          >
-            Annual <span className="inline-flex items-center bg-[rgba(110,231,183,0.15)] text-brand-accent text-[10px] font-semibold py-0.5 px-1.5 rounded-full ml-1.5 tracking-[0.05em]">Save 20%</span>
-          </button>
-        </div>
+
 
         <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6 items-start reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out max-md:p-4">
           {state.plans.map((plan) => {
@@ -352,6 +346,7 @@ export function AlphaexploraLandingView() {
                 pricingMode={state.pricingMode}
                 displayedPrice={displayedPrice}
                 isSelected={state.selectedPlan === plan.name}
+                isDisabled={state.isSubscriptionLoading || state.isSubscriptionSaving}
                 onSelect={(planName) => vm.selectPlan(planName)}
               />
             )
@@ -428,11 +423,11 @@ export function AlphaexploraLandingView() {
 
       <section id="waitlist" ref={waitlistRef} className="py-24 px-8 max-w-[1200px] mx-auto border-t border-brand-border text-center">
         <div className="max-w-[560px] mx-auto reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          <div className="text-brand-accent text-xs tracking-[0.08em] uppercase font-medium mb-4">Beta access</div>
-          <h2 className="font-head text-[clamp(1.8rem,4vw,3rem)] font-bold tracking-[-0.02em] leading-[1.15] mb-5">Be first. Lock in founding rates.</h2>
+          <div className="text-brand-accent text-xs tracking-[0.08em] uppercase font-medium mb-4">Private beta access</div>
+          <h2 className="font-head text-[clamp(1.8rem,4vw,3rem)] font-bold tracking-[-0.02em] leading-[1.15] mb-5">Join the beta before public launch.</h2>
           <p className="text-[1.05rem] text-brand-text2 max-w-[520px] leading-[1.7] mx-auto">
-            Beta members get 40% off their first year, a dedicated onboarding
-            call, and direct access to our product team.
+            Qualified teams get founding pricing, a dedicated onboarding session,
+            and direct access to the product team during rollout.
           </p>
 
           <div className="mt-12">
@@ -461,7 +456,7 @@ export function AlphaexploraLandingView() {
                     }}
                   />
                   <button className="bg-brand-accent text-[#052e16] font-body text-[15px] font-semibold px-7 py-3 transition-opacity duration-200 cursor-pointer border-0 whitespace-nowrap hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed max-sm:w-full max-sm:py-3.5" type="submit" disabled={state.isSubmitting}>
-                    {state.isSubmitting ? 'Joining...' : 'Join waitlist'}
+                    {state.isSubmitting ? 'Joining...' : 'Join Beta'}
                   </button>
                 </div>
                 <div
@@ -488,18 +483,13 @@ export function AlphaexploraLandingView() {
           Copyright {new Date().getFullYear()} Alphaexplora Technologies, Inc. All rights reserved.
         </p>
         <ul className="flex gap-8 list-none max-sm:flex-col max-sm:gap-4">
-          <li>
-            <NavLink to="/privacy" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Privacy</NavLink>
-          </li>
-          <li>
-            <NavLink to="/terms" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Terms</NavLink>
-          </li>
-          <li>
-            <NavLink to="/security" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Security</NavLink>
-          </li>
-          <li>
-            <NavLink to="/status" className="text-[13px] text-brand-text3 hover:text-brand-text transition-colors">Status</NavLink>
-          </li>
+          {navigationItems.map((item) => (
+            <li key={item.href}>
+              <a href={item.href} className="text-[13px] text-brand-text3 transition-colors hover:text-brand-text">
+                {item.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </footer>
     </div>

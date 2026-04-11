@@ -150,6 +150,9 @@ const landingPageContent = {
   ],
 }
 
+const VALID_PLAN_NAMES = new Set(['Starter', 'Business', 'Enterprise'])
+const VALID_BILLING_CYCLES = new Set(['monthly', 'annual'])
+
 function clone(data) {
   return JSON.parse(JSON.stringify(data))
 }
@@ -166,6 +169,53 @@ export function isValidWaitlistEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
+export function normalizePlanName(planName = 'Starter') {
+  return VALID_PLAN_NAMES.has(planName) ? planName : 'Starter'
+}
+
+export function normalizeBillingCycle(billingCycle = 'monthly') {
+  return VALID_BILLING_CYCLES.has(billingCycle) ? billingCycle : 'monthly'
+}
+
+export function createSubscriptionSnapshot({
+  planName = 'Starter',
+  billingCycle = 'monthly',
+} = {}) {
+  const normalizedPlanName = normalizePlanName(planName)
+  const normalizedBillingCycle = normalizeBillingCycle(billingCycle)
+  const hasActiveSubscription = normalizedPlanName !== 'Starter'
+
+  return {
+    planName: normalizedPlanName,
+    billingCycle: normalizedBillingCycle,
+    hasActiveSubscription,
+    accessTier: hasActiveSubscription ? 'premium' : 'free',
+  }
+}
+
+export async function fetchSubscriptionState() {
+  await new Promise((resolve) => setTimeout(resolve, 300))
+  
+  const savedState = localStorage.getItem('alphaexplora_subscription')
+  if (savedState) {
+    return JSON.parse(savedState)
+  }
+
+  return createSubscriptionSnapshot({
+    planName: 'Business',
+    billingCycle: 'monthly',
+  })
+}
+
+export async function updateSubscriptionState(subscriptionInput = {}) {
+  await new Promise((resolve) => setTimeout(resolve, 400))
+  
+  const nextSnapshot = createSubscriptionSnapshot(subscriptionInput)
+  localStorage.setItem('alphaexplora_subscription', JSON.stringify(nextSnapshot))
+  
+  return nextSnapshot
+}
+
 export async function submitWaitlistEmail(email) {
   const normalizedEmail = normalizeEmail(email)
 
@@ -177,29 +227,8 @@ export async function submitWaitlistEmail(email) {
     throw new Error('Please enter a valid email address.')
   }
 
-  try {
-    const response = await fetch('/api/waitlist', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: normalizedEmail }),
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Failed to join waitlist. Please try again.')
-    }
-
-    return { email: data.email }
-  } catch (error) {
-    console.error('Waitlist API Error:', error)
-    
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : 'Something went wrong while joining the waitlist. Please try again later.',
-    )
-  }
+  await new Promise((resolve) => setTimeout(resolve, 800))
+  
+  // Simulate successful waitlist join
+  return { email: normalizedEmail }
 }

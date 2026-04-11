@@ -1,70 +1,91 @@
-import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
-import { createClient } from '@supabase/supabase-js';
+import express from 'express';
 import process from 'process';
+import { pathToFileURL } from 'url';
 
-dotenv.config();
-
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
+export const DUPLICATE_WAITLIST_MESSAGE = 'This email is already registered';
+const VALID_PLAN_NAMES = new Set(['Starter', 'Business', 'Enterprise']);
+const VALID_BILLING_CYCLES = new Set(['monthly', 'annual']);
+const existingWaitlistEmails = new Set([
+  'test@test.com',
+  'finance@meridian.com',
+  'ops@vantara.io',
+]);
+
+let activeSubscription = createSubscriptionState({
+  planName: 'Business',
+  billingCycle: 'monthly',
+});
+
 app.use(cors());
 app.use(express.json());
 
-// Init Supabase
-const supabaseUrl = process.env.VITE_SUPABASE_URL || '';
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
+function normalizeEmail(email = '') {
+  return String(email).trim().toLowerCase();
+}
 
-app.post('/api/waitlist', async (req, res) => {
-  const { email } = req.body;
+function isValidWaitlistEmail(email = '') {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
-  if (!email) {
+function normalizePlanName(planName = 'Starter') {
+  return VALID_PLAN_NAMES.has(planName) ? planName : 'Starter';
+}
+
+function normalizeBillingCycle(billingCycle = 'monthly') {
+  return VALID_BILLING_CYCLES.has(billingCycle) ? billingCycle : 'monthly';
+}
+
+export function createSubscriptionState({ planName, billingCycle } = {}) {
+  const normalizedPlanName = normalizePlanName(planName);
+  const normalizedBillingCycle = normalizeBillingCycle(billingCycle);
+  const hasActiveSubscription = normalizedPlanName !== 'Starter';
+
+  return {
+    planName: normalizedPlanName,
+    billingCycle: normalizedBillingCycle,
+    hasActiveSubscription,
+    accessTier: hasActiveSubscription ? 'premium' : 'free',
+  };
+}
+
+app.get('/api/subscription', (_req, res) => {
+  return res.status(200).json(activeSubscription);
+});
+
+app.post('/api/subscription', (req, res) => {
+  activeSubscription = createSubscriptionState(req.body ?? {});
+  return res.status(200).json(activeSubscription);
+});
+
+app.post('/api/waitlist', (req, res) => {
+  const normalizedEmail = normalizeEmail(req.body?.email);
+
+  if (!normalizedEmail) {
     return res.status(400).json({ error: 'Please enter your email address.' });
   }
 
-  try {
-    // 1. Check if email already exists in Supabase
-    const { data: existing, error: fetchError } = await supabase
-      .from('waitlist')
-      .select('email')
-      .eq('email', email)
-      .single();
-
-    if (fetchError && fetchError.code !== 'PGRST116') {
-      throw fetchError;
-    }
-
-    if (existing) {
-      return res.status(409).json({ error: 'This email is already registered. Check your inbox for your invite details.' });
-    }
-
-    // 2. Insert new email
-    const { error: insertError } = await supabase
-      .from('waitlist')
-      .insert([{ email }]);
-
-    if (insertError) {
-      throw insertError;
-    }
-
-    return res.status(200).json({ success: true, email });
-  } catch (error) {
-    console.error('Supabase Error:', error);
-
-    // Handle unique constraint violation 
-    if (error.code === '23505') {
-      return res.status(409).json({ error: 'This email is already registered.' });
-    }
-
-    return res.status(500).json({
-      error: error.message || 'Something went wrong while joining the waitlist. Please try again later.'
-    });
+  if (!isValidWaitlistEmail(normalizedEmail)) {
+    return res.status(400).json({ error: 'Please enter a valid email address.' });
   }
+
+  if (existingWaitlistEmails.has(normalizedEmail)) {
+    return res.status(409).json({ error: DUPLICATE_WAITLIST_MESSAGE });
+  }
+
+  existingWaitlistEmails.add(normalizedEmail);
+
+  return res.status(200).json({
+    success: true,
+    email: normalizedEmail,
+  });
 });
 
-app.listen(PORT, () => {
-  console.log(`Express server is running on http://localhost:${PORT}`);
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  app.listen(PORT, () => {
+    console.log(`Express server is running on http://localhost:${PORT}`);
+  });
+}
