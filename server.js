@@ -16,7 +16,7 @@ const existingWaitlistEmails = new Set([
 ]);
 
 let activeSubscription = createSubscriptionState({
-  planName: 'Business',
+  planName: 'Starter',
   billingCycle: 'monthly',
 });
 

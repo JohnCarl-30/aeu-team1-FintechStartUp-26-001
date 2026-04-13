@@ -18,7 +18,7 @@ export class AlphaexploraLandingViewModel extends BaseViewModel {
   constructor() {
     const content = getLandingPageContent()
     const initialSubscription = createSubscriptionSnapshot({
-      planName: 'Business',
+      planName: 'Starter',
       billingCycle: 'monthly',
     })
 
@@ -110,9 +110,7 @@ export class AlphaexploraLandingViewModel extends BaseViewModel {
       subscriptionError: '',
       scrollTarget: shouldScroll
         ? {
-            section: nextSubscriptionStatus.hasActiveSubscription
-              ? 'unlocked'
-              : 'waitlist',
+            section: nextSubscriptionStatus.hasActiveSubscription ? 'premium' : 'waitlist',
             id: this.scrollRequestId,
           }
         : this.state.scrollTarget,

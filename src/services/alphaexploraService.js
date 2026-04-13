@@ -1,151 +1,159 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api'
+
+export const DUPLICATE_WAITLIST_MESSAGE = 'This email is already registered'
+const SUBSCRIPTION_STORAGE_KEY = 'alphaexplora_subscription'
+const WAITLIST_STORAGE_KEY = 'alphaexplora_waitlist'
+const DEFAULT_WAITLIST_EMAILS = [
+  'test@test.com',
+  'finance@meridian.com',
+  'ops@vantara.io',
+]
 
 const landingPageContent = {
-  pageTitle: 'Alphaexplora - Enterprise Software Platform',
+  pageTitle: 'Alphaexplora - Fintech SaaS Platform',
   stats: [
     { value: '98%', label: 'Uptime SLA guaranteed' },
-    { value: '3.2x', label: 'Average productivity gain' },
-    { value: '14k', label: 'Teams on the platform' },
+    { value: '3.2x', label: 'Average workflow productivity gain' },
+    { value: '14k', label: 'Teams managing operations on-platform' },
     { value: '<80 ms', label: 'Global p95 response time' },
   ],
-  logos: ['Meridian', 'Vantara', 'Prism&Co', 'Orbis', 'Kova'],
   features: [
     {
-      icon: 'RT',
-      title: 'Real-time Collaboration',
-      description:
-        'Simultaneous editing, presence indicators, and conflict-free merging. Your whole team, always in sync.',
-    },
-    {
-      icon: 'SC',
-      title: 'Enterprise Security',
-      description:
-        'SOC 2 Type II controls, SSO and SAML, granular RBAC, and encryption for data at rest and in transit.',
-    },
-    {
       icon: 'AP',
-      title: '500+ Integrations',
+      title: 'Automated approvals',
       description:
-        'Native connectors for Salesforce, Jira, Slack, and every major SaaS tool, plus a full REST API and webhooks.',
+        'Route finance, compliance, and operational approvals instantly with policy-aware workflows.',
+    },
+    {
+      icon: 'AR',
+      title: 'Audit-ready records',
+      description:
+        'Track every decision, status change, and handoff with a clean audit trail your team can trust.',
     },
     {
       icon: 'BI',
-      title: 'Advanced Analytics',
+      title: 'Business intelligence',
       description:
-        'Live dashboards, custom metrics, anomaly detection, and exportable reporting for every stakeholder.',
+        'Give leadership live dashboards across revenue, service delivery, and customer health.',
     },
     {
       icon: 'AI',
-      title: 'AI Automation',
+      title: 'AI workflow assistant',
       description:
-        'Intelligent task routing, predictive bottleneck alerts, and smart summaries powered by foundation models.',
+        'Summarize activity, flag blockers, and surface next actions without extra manual reporting.',
     },
     {
-      icon: 'GL',
-      title: 'Global Infrastructure',
+      icon: 'RB',
+      title: 'Role-based controls',
       description:
-        'Deployed across 12 regions with data residency options for GDPR, HIPAA, and industry-specific compliance.',
+        'Protect sensitive financial and operational data with granular permissions and secure access tiers.',
+    },
+    {
+      icon: 'IN',
+      title: 'Integrations that fit',
+      description:
+        'Connect CRM, accounting, support, and internal systems through APIs and event-based syncs.',
     },
   ],
   unlockedFeatures: [
     {
-      title: 'Custom AI Agents',
+      title: 'Premium analytics workspace',
       description:
-        'Build, deploy, and manage autonomous agents tailored to your exact workflows with no ML team required.',
+        'Monitor margin signals, workflow bottlenecks, and team performance in one executive layer.',
     },
     {
-      title: 'Dedicated Infrastructure',
+      title: 'Advanced automation rules',
       description:
-        'Isolated compute clusters, dedicated egress IPs, and a committed SLA with financial guarantees.',
+        'Create premium routing logic with escalations, conditional branches, and SLA-aware triggers.',
     },
     {
-      title: 'White-label Portal',
+      title: 'Dedicated onboarding support',
       description:
-        'Expose a branded client portal with custom domains, themes, and feature flags for each customer segment.',
+        'Launch faster with guided migration, configuration help, and premium implementation support.',
     },
     {
-      title: 'Priority Support and CSM',
+      title: 'Custom reporting access',
       description:
-        '24/7 engineering escalation, a named success partner, and quarterly business reviews for every account.',
+        'Unlock deeper exports, custom stakeholder views, and shareable performance snapshots.',
     },
   ],
   plans: [
     {
       name: 'Starter',
       description:
-        'For small teams getting started. Free forever, no credit card required.',
+        'For small teams validating workflow fit before rolling out across the business.',
       monthly: 0,
       annual: 0,
-      annualNote: '',
-      buttonLabel: 'Get started free',
+      annualNote: 'Free tier for initial validation and internal testing',
+      buttonLabel: 'Stay on Starter',
       features: [
         'Up to 5 users',
-        '3 active projects',
-        '5 GB storage',
+        'Core workflow automation',
+        'Basic dashboards',
         'Community support',
-        'Core integrations (10)',
+        'Waitlist and beta access',
       ],
     },
     {
       name: 'Business',
       description:
-        'For growing teams that need power, security, and scalability.',
+        'For scaling teams that need stronger controls, reporting, and premium workflow depth.',
       monthly: 79,
       annual: 63,
       annualNote: {
-        monthly: 'Switch to annual to save $192 per seat per year',
-        annual: 'Billed as $756 per seat yearly - save $192 vs monthly',
+        monthly: 'Switch to annual to save $192 per seat each year',
+        annual: 'Billed yearly at $756 per seat and includes premium unlocks',
       },
-      buttonLabel: 'Start 14-day trial',
+      buttonLabel: 'Activate Business',
       featured: true,
       features: [
         'Unlimited users',
-        'Unlimited projects',
-        '500 GB storage',
+        'Advanced approvals',
+        'Premium analytics workspace',
         'Priority support',
-        'All 500+ integrations',
-        'Advanced analytics',
-        'SSO and SAML',
+        'Audit-ready activity logs',
+        'AI workflow assistant',
+        'SSO and RBAC',
       ],
     },
     {
       name: 'Enterprise',
       description:
-        'For organizations with complex requirements and dedicated support.',
+        'For organizations with custom governance, onboarding, and implementation requirements.',
       custom: true,
-      annualNote: 'Contact us for annual pricing',
-      buttonLabel: 'Contact sales',
+      annualNote: 'Contact sales for enterprise billing and rollout support',
+      buttonLabel: 'Talk to sales',
       features: [
         'Everything in Business',
-        'Custom AI agents',
-        'Dedicated infrastructure',
-        'White-label portal',
-        'Named CSM',
-        '99.99% SLA',
-        'Custom contracts and DPA',
+        'Custom automation rules',
+        'Dedicated infrastructure options',
+        'Security review support',
+        'Custom data residency',
+        'Named onboarding partner',
       ],
     },
   ],
   testimonials: [
     {
-      initials: 'SR',
-      name: 'Sarah Reinholt',
-      role: 'VP of Engineering, Meridian Technologies',
+      initials: 'MK',
+      name: 'Mara Kent',
+      role: 'Head of Operations, Northstar Capital',
       quote:
-        'Switching to Alphaexplora cut our cross-team communication overhead by nearly half. What used to take three tools and a Slack thread now happens in one place, with an audit trail and zero dropped context.',
+        'Alphaexplora gave our finance and client-ops teams one operating layer. Approvals, exceptions, and status updates finally happen in the same system.',
     },
     {
-      initials: 'DK',
-      name: 'Daniel Kim',
-      role: 'COO, Vantara Systems',
+      initials: 'JL',
+      name: 'Jonas Lee',
+      role: 'Chief of Staff, Paygrid Systems',
       quote:
-        'The AI automation alone paid for the subscription in week one. Our ops team went from manually routing 200 daily requests to handling edge cases only. It is genuinely transformative.',
+        'The pricing logic made it easy to test free versus premium access with stakeholders, and the premium workspace is where the real value clicked for our team.',
     },
     {
-      initials: 'AM',
-      name: 'Anika Metzger',
-      role: 'CISO, Orbis Financial Group',
+      initials: 'RP',
+      name: 'Rina Patel',
+      role: 'VP Customer Success, Alloy Ledger',
       quote:
-        'Our security team had concerns about moving to a new platform. Alphaexplora documentation and the dedicated security review call resolved every one of them. The RBAC model feels enterprise-grade.',
+        'The waitlist experience was clean, and the product itself feels trustworthy. We could show leadership the premium unlocks immediately after changing the active plan.',
     },
   ],
 }
@@ -155,6 +163,65 @@ const VALID_BILLING_CYCLES = new Set(['monthly', 'annual'])
 
 function clone(data) {
   return JSON.parse(JSON.stringify(data))
+}
+
+async function apiRequest(path, options = {}) {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      ...(options.headers ?? {}),
+    },
+    ...options,
+  })
+
+  const payload = await response.json().catch(() => ({}))
+
+  if (!response.ok) {
+    throw new Error(payload.error ?? 'Something went wrong while contacting the server.')
+  }
+
+  return payload
+}
+
+function isNetworkError(error) {
+  return (
+    error instanceof TypeError ||
+    /failed to fetch|networkerror|load failed/i.test(String(error?.message ?? ''))
+  )
+}
+
+function readStoredWaitlistEmails() {
+  let storedEmails = []
+
+  try {
+    const parsed = JSON.parse(localStorage.getItem(WAITLIST_STORAGE_KEY) ?? '[]')
+    storedEmails = Array.isArray(parsed) ? parsed : []
+  } catch {
+    storedEmails = []
+  }
+
+  return new Set(
+    [...DEFAULT_WAITLIST_EMAILS, ...storedEmails]
+      .map((email) => normalizeEmail(email))
+      .filter(Boolean),
+  )
+}
+
+function writeStoredWaitlistEmails(emailSet) {
+  localStorage.setItem(WAITLIST_STORAGE_KEY, JSON.stringify([...emailSet]))
+}
+
+function readStoredSubscription() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(SUBSCRIPTION_STORAGE_KEY) ?? '{}')
+    return createSubscriptionSnapshot(parsed)
+  } catch {
+    return createSubscriptionSnapshot()
+  }
+}
+
+function writeStoredSubscription(snapshot) {
+  localStorage.setItem(SUBSCRIPTION_STORAGE_KEY, JSON.stringify(snapshot))
 }
 
 export function getLandingPageContent() {
@@ -194,26 +261,36 @@ export function createSubscriptionSnapshot({
 }
 
 export async function fetchSubscriptionState() {
-  await new Promise((resolve) => setTimeout(resolve, 300))
-  
-  const savedState = localStorage.getItem('alphaexplora_subscription')
-  if (savedState) {
-    return JSON.parse(savedState)
-  }
+  try {
+    return await apiRequest('/subscription')
+  } catch (error) {
+    if (isNetworkError(error)) {
+      return readStoredSubscription()
+    }
 
-  return createSubscriptionSnapshot({
-    planName: 'Business',
-    billingCycle: 'monthly',
-  })
+    throw error
+  }
 }
 
 export async function updateSubscriptionState(subscriptionInput = {}) {
-  await new Promise((resolve) => setTimeout(resolve, 400))
-  
   const nextSnapshot = createSubscriptionSnapshot(subscriptionInput)
-  localStorage.setItem('alphaexplora_subscription', JSON.stringify(nextSnapshot))
-  
-  return nextSnapshot
+
+  try {
+    const response = await apiRequest('/subscription', {
+      method: 'POST',
+      body: JSON.stringify(nextSnapshot),
+    })
+
+    writeStoredSubscription(response)
+    return response
+  } catch (error) {
+    if (isNetworkError(error)) {
+      writeStoredSubscription(nextSnapshot)
+      return nextSnapshot
+    }
+
+    throw error
+  }
 }
 
 export async function submitWaitlistEmail(email) {
@@ -227,8 +304,28 @@ export async function submitWaitlistEmail(email) {
     throw new Error('Please enter a valid email address.')
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 800))
-  
-  // Simulate successful waitlist join
-  return { email: normalizedEmail }
+  try {
+    return await apiRequest('/waitlist', {
+      method: 'POST',
+      body: JSON.stringify({ email: normalizedEmail }),
+    })
+  } catch (error) {
+    if (!isNetworkError(error)) {
+      throw error
+    }
+
+    const existingEmails = readStoredWaitlistEmails()
+
+    if (existingEmails.has(normalizedEmail)) {
+      throw new Error(DUPLICATE_WAITLIST_MESSAGE)
+    }
+
+    existingEmails.add(normalizedEmail)
+    writeStoredWaitlistEmails(existingEmails)
+
+    return {
+      success: true,
+      email: normalizedEmail,
+    }
+  }
 }
