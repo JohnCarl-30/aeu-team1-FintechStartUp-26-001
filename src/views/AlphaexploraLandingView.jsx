@@ -79,7 +79,7 @@ export function AlphaexploraLandingView() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-bg text-brand-text">
+    <div className="min-h-screen flex flex-col bg-brand-bg text-brand-text">
       <nav className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-brand-border bg-[rgba(15,23,42,0.72)] backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards]">
         <div className={`${shellClass} flex h-full items-center justify-between gap-6`}>
           <div className="flex items-center gap-3">
@@ -223,11 +223,10 @@ export function AlphaexploraLandingView() {
                 <button
                   key={mode}
                   type="button"
-                  className={`rounded-full px-4 py-2 text-sm font-semibold capitalize tracking-[0.01em] transition-all duration-200 ${
-                    state.pricingMode === mode
-                      ? 'bg-brand-accent text-[#052e16]'
-                      : 'text-brand-text2 hover:text-brand-text'
-                  }`}
+                  className={`rounded-full px-4 py-2 text-sm font-semibold capitalize tracking-[0.01em] transition-all duration-200 ${state.pricingMode === mode
+                    ? 'bg-brand-accent text-[#052e16]'
+                    : 'text-brand-text2 hover:text-brand-text'
+                    }`}
                   onClick={() => vm.setPricingMode(mode)}
                   disabled={state.isSubscriptionSaving}
                 >
@@ -391,11 +390,10 @@ export function AlphaexploraLandingView() {
             {state.testimonials.map((testimonial, index) => (
               <button
                 key={testimonial.name}
-                className={`h-[6px] cursor-pointer rounded-full border-0 transition-all duration-200 ${
-                  state.currentSlide === index
-                    ? 'w-5 rounded-[3px] bg-brand-accent'
-                    : 'w-[6px] bg-brand-border2'
-                }`}
+                className={`h-[6px] cursor-pointer rounded-full border-0 transition-all duration-200 ${state.currentSlide === index
+                  ? 'w-5 rounded-[3px] bg-brand-accent'
+                  : 'w-[6px] bg-brand-border2'
+                  }`}
                 type="button"
                 aria-label={`Go to testimonial ${index + 1}`}
                 onClick={() => vm.goToSlide(index)}
@@ -418,9 +416,6 @@ export function AlphaexploraLandingView() {
           <div className="mb-4 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Beta waitlist
           </div>
-          <h2 className="mb-5 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Capture emails cleanly and block duplicate submissions.
-          </h2>
           <p className="mx-auto max-w-[560px] text-[1.05rem] leading-[1.7] text-brand-text2">
             The form checks the server-side existing email list before adding a new
             entry. Submit `test@test.com` to validate the required duplicate error state.
@@ -445,11 +440,10 @@ export function AlphaexploraLandingView() {
             ) : (
               <form className="flex flex-col items-stretch" onSubmit={handleSubmit}>
                 <div
-                  className={`flex overflow-hidden rounded-brand border bg-brand-bg2 transition-colors duration-200 focus-within:border-brand-accent max-sm:flex-col ${
-                    state.formMessage.type === 'error'
-                      ? 'border-brand-red'
-                      : 'border-brand-border'
-                  }`}
+                  className={`flex overflow-hidden rounded-brand border bg-brand-bg2 transition-colors duration-200 focus-within:border-brand-accent max-sm:flex-col ${state.formMessage.type === 'error'
+                    ? 'border-brand-red'
+                    : 'border-brand-border'
+                    }`}
                 >
                   <input
                     type="email"
@@ -471,13 +465,12 @@ export function AlphaexploraLandingView() {
                   </button>
                 </div>
                 <div
-                  className={`mt-3 min-h-[20px] text-left text-sm transition-all duration-300 ${
-                    state.formMessage.type === 'error'
-                      ? 'text-brand-red'
-                      : state.formMessage.type === 'success'
-                        ? 'text-brand-accent'
-                        : 'text-brand-text2'
-                  }`}
+                  className={`mt-3 min-h-[20px] text-left text-sm transition-all duration-300 ${state.formMessage.type === 'error'
+                    ? 'text-brand-red'
+                    : state.formMessage.type === 'success'
+                      ? 'text-brand-accent'
+                      : 'text-brand-text2'
+                    }`}
                   aria-live="assertive"
                 >
                   {state.formMessage.text}
@@ -492,7 +485,7 @@ export function AlphaexploraLandingView() {
         </div>
       </section>
 
-      <footer className={`${shellClass} border-t border-brand-border py-20`}>
+      <footer className={`${shellClass} border-t border-brand-border pt-20 pb-8 mt-auto`}>
         <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
             <Link
@@ -564,7 +557,7 @@ export function AlphaexploraLandingView() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-brand-border pt-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-brand-border pt-8 mt-20">
           <p className="text-[13px] text-brand-text3">
             © {new Date().getFullYear()} Alphaexplora. All rights reserved.
           </p>
