@@ -10,150 +10,150 @@ const DEFAULT_WAITLIST_EMAILS = [
 ]
 
 const landingPageContent = {
-  pageTitle: 'Alphaexplora - Fintech SaaS Platform',
+  pageTitle: 'Alphaexplora - Institutional Fintech Command Center',
   stats: [
-    { value: '98%', label: 'Uptime SLA guaranteed' },
-    { value: '3.2x', label: 'Average workflow productivity gain' },
-    { value: '14k', label: 'Teams managing operations on-platform' },
-    { value: '<80 ms', label: 'Global p95 response time' },
+    { value: '99.99%', label: 'Infrastructure uptime' },
+    { value: '45%', label: 'Efficiency gain in approvals' },
+    { value: '2,500+', label: 'Enterprise organizations' },
+    { value: '<50ms', label: 'Edge latency' },
   ],
   features: [
     {
-      icon: 'AP',
-      title: 'Automated approvals',
+      icon: 'TR',
+      title: 'Treasury management',
       description:
-        'Route finance, compliance, and operational approvals instantly with policy-aware workflows.',
+        'Manage global liquidity across multiple entities and currencies with real-time positioning.',
     },
     {
-      icon: 'AR',
-      title: 'Audit-ready records',
+      icon: 'RM',
+      title: 'Risk orchestration',
       description:
-        'Track every decision, status change, and handoff with a clean audit trail your team can trust.',
+        'Unified risk monitoring engine that flags anomalies and policy violations automatically.',
     },
     {
-      icon: 'BI',
-      title: 'Business intelligence',
+      icon: 'LD',
+      title: 'Ledger-as-a-service',
       description:
-        'Give leadership live dashboards across revenue, service delivery, and customer health.',
+        'High-performance immutable ledger for high-volume transaction processing and accounting.',
     },
     {
-      icon: 'AI',
-      title: 'AI workflow assistant',
+      icon: 'AN',
+      title: 'Predictive analytics',
       description:
-        'Summarize activity, flag blockers, and surface next actions without extra manual reporting.',
+        'Leverage historical data to forecast cash flow, churn, and operational bottlenecks.',
     },
     {
-      icon: 'RB',
-      title: 'Role-based controls',
+      icon: 'CO',
+      title: 'Compliance autopilot',
       description:
-        'Protect sensitive financial and operational data with granular permissions and secure access tiers.',
+        'Automated KYC, AML, and regulatory reporting tailored to global jurisdictions.',
     },
     {
-      icon: 'IN',
-      title: 'Integrations that fit',
+      icon: 'EX',
+      title: 'Open API ecosystem',
       description:
-        'Connect CRM, accounting, support, and internal systems through APIs and event-based syncs.',
+        'Integrate seamlessly with your existing stack via our developer-first API and SDKs.',
     },
   ],
   unlockedFeatures: [
     {
-      title: 'Premium analytics workspace',
+      title: 'Global multi-entity support',
       description:
-        'Monitor margin signals, workflow bottlenecks, and team performance in one executive layer.',
+        'Consolidate reporting and operations across an unlimited number of international subsidiaries.',
     },
     {
-      title: 'Advanced automation rules',
+      title: 'Premium institutional support',
       description:
-        'Create premium routing logic with escalations, conditional branches, and SLA-aware triggers.',
+        '24/7 dedicated account management with a guaranteed 15-minute response time SLA.',
     },
     {
-      title: 'Dedicated onboarding support',
+      title: 'Advanced custom workflows',
       description:
-        'Launch faster with guided migration, configuration help, and premium implementation support.',
+        'Design complex multi-stage approvals with conditional logic and external data enrichment.',
     },
     {
-      title: 'Custom reporting access',
+      title: 'Direct banking integrations',
       description:
-        'Unlock deeper exports, custom stakeholder views, and shareable performance snapshots.',
+        'Connect directly to major global banks for automated reconciliation and execution.',
     },
   ],
   plans: [
     {
       name: 'Starter',
       description:
-        'For small teams validating workflow fit before rolling out across the business.',
+        'Essential fintech toolkit for early-stage teams and rapid prototyping.',
       monthly: 0,
       annual: 0,
-      annualNote: 'Free tier for initial validation and internal testing',
-      buttonLabel: 'Stay on Starter',
+      annualNote: 'Free for up to 5 users, forever.',
+      buttonLabel: 'Get Started',
       features: [
         'Up to 5 users',
-        'Core workflow automation',
-        'Basic dashboards',
-        'Community support',
-        'Waitlist and beta access',
+        'Standard ledger access',
+        'Basic reporting',
+        'Email support',
+        'Public API access',
       ],
     },
     {
       name: 'Business',
       description:
-        'For scaling teams that need stronger controls, reporting, and premium workflow depth.',
-      monthly: 79,
-      annual: 63,
+        'Comprehensive command layer for scaling organizations with complex needs.',
+      monthly: 99,
+      annual: 79,
       annualNote: {
-        monthly: 'Switch to annual to save $192 per seat each year',
-        annual: 'Billed yearly at $756 per seat and includes premium unlocks',
+        monthly: 'Save $240 per year when billed annually',
+        annual: 'Billed annually at $948 per year',
       },
-      buttonLabel: 'Activate Business',
+      buttonLabel: 'Upgrade Now',
       featured: true,
       features: [
+        'Everything in Starter',
         'Unlimited users',
-        'Advanced approvals',
-        'Premium analytics workspace',
+        'Risk orchestration engine',
         'Priority support',
-        'Audit-ready activity logs',
-        'AI workflow assistant',
-        'SSO and RBAC',
+        'Full audit logs',
+        'Predictive analytics',
+        'SSO & Advanced RBAC',
       ],
     },
     {
       name: 'Enterprise',
       description:
-        'For organizations with custom governance, onboarding, and implementation requirements.',
+        'Dedicated infrastructure and white-glove support for global enterprises.',
       custom: true,
-      annualNote: 'Contact sales for enterprise billing and rollout support',
-      buttonLabel: 'Talk to sales',
+      annualNote: 'Custom pricing based on volume and requirements',
+      buttonLabel: 'Contact Sales',
       features: [
         'Everything in Business',
-        'Custom automation rules',
-        'Dedicated infrastructure options',
-        'Security review support',
-        'Custom data residency',
-        'Named onboarding partner',
+        'Custom workflow builder',
+        'On-premise deployment',
+        'Direct bank connectivity',
+        'Compliance autopilot',
+        'Named success manager',
       ],
     },
   ],
   testimonials: [
     {
-      initials: 'MK',
-      name: 'Mara Kent',
-      role: 'Head of Operations, Northstar Capital',
+      initials: 'AM',
+      name: 'Alex Mercer',
+      role: 'CTO, GlobalPay Solutions',
       quote:
-        'Alphaexplora gave our finance and client-ops teams one operating layer. Approvals, exceptions, and status updates finally happen in the same system.',
+        'Moving our core operations to Alphaexplora reduced our reconciliation time by over 60%. The API is the most robust we have worked with.',
     },
     {
-      initials: 'JL',
-      name: 'Jonas Lee',
-      role: 'Chief of Staff, Paygrid Systems',
+      initials: 'SC',
+      name: 'Sarah Chen',
+      role: 'Director of Finance, Velocity Tech',
       quote:
-        'The pricing logic made it easy to test free versus premium access with stakeholders, and the premium workspace is where the real value clicked for our team.',
+        'The level of control we gained over our multi-entity subsidiary approvals is unprecedented. It has become our primary operating system.',
     },
     {
-      initials: 'RP',
-      name: 'Rina Patel',
-      role: 'VP Customer Success, Alloy Ledger',
+      initials: 'DV',
+      name: 'David Vance',
+      role: 'Operations Lead, FinStream',
       quote:
-        'The waitlist experience was clean, and the product itself feels trustworthy. We could show leadership the premium unlocks immediately after changing the active plan.',
+        'Exceptional performance and beautiful design. Our team actually enjoys managing complex transactions now. A game changer for us.',
     },
   ],
 }

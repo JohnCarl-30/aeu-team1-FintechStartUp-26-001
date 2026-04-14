@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AlphaexploraLandingViewModel, useViewModel } from '../viewModels'
 import { FeatureCard } from '../components/FeatureCard'
@@ -9,8 +9,9 @@ export function AlphaexploraLandingView() {
   const { vm, state } = useViewModel(AlphaexploraLandingViewModel)
   const premiumRef = useRef(null)
   const waitlistRef = useRef(null)
+  const [activeSection, setActiveSection] = useState('hero')
   const shellClass = 'mx-auto w-full max-w-[1500px] px-8 max-md:px-4'
-  const sectionClass = `${shellClass} border-t border-brand-border py-24`
+  const sectionClass = `${shellClass} snap-section border-t border-brand-border py-12`
   const navigationItems = [
     { href: '#features', label: 'Features' },
     { href: '#pricing', label: 'Pricing' },
@@ -45,14 +46,21 @@ export function AlphaexploraLandingView() {
           if (entry.isIntersecting) {
             entry.target.classList.add('opacity-100', 'translate-y-0')
             entry.target.classList.remove('opacity-0', 'translate-y-[30px]')
+            
+            if (entry.target.id) {
+              setActiveSection(entry.target.id)
+            }
           }
         })
       },
-      { threshold: 0.12 },
+      { threshold: 0.5 },
     )
 
-    const elements = document.querySelectorAll('.reveal')
-    elements.forEach((element) => observer.observe(element))
+    const sections = document.querySelectorAll('.snap-section')
+    const revealElements = document.querySelectorAll('.reveal')
+    
+    sections.forEach((section) => observer.observe(section))
+    revealElements.forEach((element) => observer.observe(element))
 
     return () => observer.disconnect()
   }, [])
@@ -79,8 +87,30 @@ export function AlphaexploraLandingView() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-bg text-brand-text">
-      <nav className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-brand-border bg-[rgba(15,23,42,0.72)] backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards]">
+    <div className="snap-container bg-brand-bg text-brand-text">
+      {/* Side Dot Navigation */}
+      <div className="fixed right-6 top-1/2 z-[60] -translate-y-1/2 flex flex-col gap-4 max-md:hidden">
+        {['hero', 'features', 'pricing', 'premium', 'testimonials', 'waitlist', 'footer'].map((id) => (
+          <a
+            key={id}
+            href={`#${id === 'hero' ? '' : id}`}
+            className="group relative flex items-center justify-center p-2"
+            aria-label={`Jump to ${id}`}
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+              setActiveSection(id)
+            }}
+          >
+            <div className={`h-1.5 rounded-full transition-all duration-300 ${activeSection === id ? 'w-6 bg-brand-accent' : 'w-1.5 bg-brand-text/20 group-hover:bg-brand-accent group-hover:scale-125'}`}></div>
+            <div className={`absolute right-8 scale-0 bg-brand-bg2 border border-brand-border px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-brand-accent transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 ${activeSection === id ? 'scale-100 opacity-100' : 'opacity-0'}`}>
+              {id}
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <nav id="top" className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-brand-border bg-[rgba(15,23,42,0.72)] backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards]">
         <div className={`${shellClass} flex h-full items-center justify-between gap-6`}>
           <div className="flex items-center gap-3">
             <Link
@@ -111,12 +141,12 @@ export function AlphaexploraLandingView() {
             href="#waitlist"
             className="rounded-brand-sm bg-brand-accent px-5 py-2.5 font-body text-sm font-semibold text-[#052e16] transition-all duration-200 hover:-translate-y-[1px] hover:opacity-90"
           >
-            Join Beta
+            Get Started
           </a>
         </div>
       </nav>
 
-      <header className="relative overflow-hidden pt-16">
+      <header id="hero" className="snap-section relative overflow-hidden pt-16">
         <div
           className="pointer-events-none absolute inset-0 bg-[length:64px_64px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_45%,black_28%,transparent_100%)]"
           style={{
@@ -139,10 +169,10 @@ export function AlphaexploraLandingView() {
             </h1>
 
             <p className="max-w-[760px] text-[clamp(1rem,1.5vw,1.16rem)] leading-[1.8] text-brand-text2 animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:220ms]">
-              Alphaexplora gives B2B teams a sleek, modern command layer for approvals,
-              reporting, automation, and premium operational visibility. The page below
-              is wired for plan switching, duplicate waitlist checks, and conditional
-              premium access so free and paid states are easy to validate manually.
+              Alphaexplora provides a unified institutional command layer for treasury,
+              risk orchestration, and global compliance. Our platform empowers 
+              modern fintech teams to scale with confidence through real-time 
+              visibility and automated multi-entity control.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:320ms] max-sm:flex-col">
@@ -187,11 +217,11 @@ export function AlphaexploraLandingView() {
             Features
           </div>
           <h2 className="mb-5 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Product capabilities that make the company feel credible immediately.
+            Unparalleled institutional capabilities designed for the modern era.
           </h2>
           <p className="max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
-            The landing page leads with trust, performance, and control so decision-makers
-            can understand the core product before pricing or signup.
+            Built from the ground up for performance, security, and global scale.
+            Our infrastructure supports the most demanding fintech workloads.
           </p>
         </div>
 
@@ -203,27 +233,25 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="pricing" className={sectionClass}>
-        <div className="mb-12 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+        <div className="mb-16 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="mb-4 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Pricing
           </div>
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <h2 className="mb-5 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-                Toggle monthly and annual pricing, then switch plans to validate state.
-              </h2>
-              <p className="max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
-                The selected subscription is stored on the backend and controls whether
-                premium content below stays hidden or becomes available.
-              </p>
-            </div>
+          <h2 className="mx-auto mb-5 max-w-[800px] font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+            Transparent institutional pricing for teams of all sizes.
+          </h2>
+          <p className="mx-auto max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
+            Choose the plan that fits your current scale and unlock more 
+            advanced capabilities as your organization grows.
+          </p>
 
+          <div className="mt-10 flex justify-center">
             <div className="inline-flex overflow-hidden rounded-full border border-brand-border bg-[rgba(15,23,42,0.62)] p-1 font-body">
               {['monthly', 'annual'].map((mode) => (
                 <button
                   key={mode}
                   type="button"
-                  className={`rounded-full px-4 py-2 text-sm font-semibold capitalize tracking-[0.01em] transition-all duration-200 ${state.pricingMode === mode
+                  className={`rounded-full px-5 py-2 text-sm font-semibold capitalize tracking-[0.01em] transition-all duration-200 ${state.pricingMode === mode
                     ? 'bg-brand-accent text-[#052e16]'
                     : 'text-brand-text2 hover:text-brand-text'
                     }`}
@@ -237,20 +265,9 @@ export function AlphaexploraLandingView() {
           </div>
         </div>
 
-        <div className="mb-8 flex flex-wrap items-center gap-3 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          <div className="rounded-full border border-brand-border bg-[rgba(15,23,42,0.54)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-text2">
-            Current plan: {state.subscriptionStatus.planName}
+          <div className="mb-12 text-center text-[15px] leading-[1.6] text-brand-text3">
+            Switching plans will immediately update your workspace and feature access.
           </div>
-          <div className="rounded-full border border-brand-border bg-[rgba(15,23,42,0.54)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-text2">
-            Billing: {state.subscriptionStatus.billingCycle}
-          </div>
-          <div className="rounded-full border border-brand-accent/25 bg-brand-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-accent">
-            Access: {state.subscriptionStatus.accessTier}
-          </div>
-          <div className="text-[15px] leading-[1.6] text-brand-text3">
-            Manual validation: switch between Starter and paid plans to confirm free and premium states.
-          </div>
-        </div>
 
         {state.subscriptionError ? (
           <div className="mb-8 rounded-brand border border-brand-red/40 bg-[rgba(248,113,113,0.08)] px-4 py-3 text-sm text-brand-red">
@@ -288,11 +305,11 @@ export function AlphaexploraLandingView() {
             Premium unlocks
           </div>
           <h2 className="mb-5 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Premium sections respond directly to the active subscription state.
+            Unlock advanced institutional tools with a premium subscription.
           </h2>
           <p className="max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
-            Starter keeps this section locked. Business or Enterprise immediately unlocks
-            the premium feature layer after the backend updates the active plan.
+            Get access to global multi-entity support, direct bank connectivity, 
+            and white-glove implementation services.
           </p>
         </div>
 
@@ -319,11 +336,11 @@ export function AlphaexploraLandingView() {
         ) : (
           <div className="reveal rounded-brand border border-brand-border bg-[rgba(15,23,42,0.62)] px-6 py-6 opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
             <div className="mb-2 font-head text-[1.2rem] font-semibold tracking-[-0.02em]">
-              Premium content is locked on the free tier.
+              Premium institutional features are currently locked.
             </div>
             <p className="text-sm leading-[1.7] text-brand-text2">
-              Select Business or Enterprise in the pricing section to unlock this area
-              and validate the conditional visibility requirement.
+              Please upgrade to a Business or Enterprise plan to gain access 
+              to our global command layer and advanced automation tools.
             </p>
           </div>
         )}
@@ -417,8 +434,8 @@ export function AlphaexploraLandingView() {
             Beta waitlist
           </div>
           <p className="mx-auto max-w-[560px] text-[1.05rem] leading-[1.7] text-brand-text2">
-            The form checks the server-side existing email list before adding a new
-            entry. Submit `test@test.com` to validate the required duplicate error state.
+            Secure your spot in our upcoming institutional beta. We are currently
+            onboarding a limited number of partners for our Q3 intake.
           </p>
 
           <div className="mt-12">
@@ -431,10 +448,10 @@ export function AlphaexploraLandingView() {
                   &#10003;
                 </div>
                 <h3 className="font-head text-[1.3rem] font-bold text-brand-accent">
-                  Invite reserved successfully.
+                  Reservation confirmed.
                 </h3>
                 <p className="text-sm text-brand-text2">
-                  We&apos;ll contact <strong className="text-brand-text">{state.successEmail}</strong> when the beta opens.
+                  We have added <strong className="text-brand-text">{state.successEmail}</strong> to the priority queue.
                 </p>
               </div>
             ) : (
@@ -449,7 +466,7 @@ export function AlphaexploraLandingView() {
                     type="email"
                     className="flex-1 border-0 bg-transparent p-[14px_16px] text-[15px] text-brand-text outline-0 placeholder:text-brand-text3"
                     value={state.email}
-                    placeholder="you@company.com"
+                    placeholder="institutional.email@firm.com"
                     autoComplete="email"
                     onChange={(event) => {
                       vm.setEmail(event.target.value)
@@ -461,7 +478,7 @@ export function AlphaexploraLandingView() {
                     type="submit"
                     disabled={state.isSubmitting}
                   >
-                    {state.isSubmitting ? 'Checking...' : 'Join Beta'}
+                    {state.isSubmitting ? 'Processing...' : 'Request Access'}
                   </button>
                 </div>
                 <div
@@ -478,14 +495,15 @@ export function AlphaexploraLandingView() {
               </form>
             )}
 
-            <p className="mt-4 text-xs text-brand-text2">
-              No spam. Unsubscribe anytime. Duplicate emails are rejected before they reach the marketing list.
+            <p className="mt-8 text-xs text-brand-text2">
+              Privacy is our priority. Your data is handled according to our 
+              institutional security standards. No marketing spam, ever.
             </p>
           </div>
         </div>
       </section>
 
-      <footer className={`${shellClass} border-t border-brand-border pt-20 pb-8 mt-auto`}>
+      <footer id="footer" className={`${shellClass} snap-section border-t border-brand-border pt-20 pb-8 mt-auto`}>
         <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
             <Link
@@ -495,8 +513,9 @@ export function AlphaexploraLandingView() {
               Alphaexplora<span className="text-brand-accent">.</span>
             </Link>
             <p className="text-[13px] leading-relaxed text-brand-text2">
-              A sleek, modern fintech SaaS landing page with validated pricing state,
-              testimonial interaction, and duplicate-safe beta capture.
+              The institutional command layer for modern fintech. 
+              Manage global liquidity, risk orchestration, and 
+              automated multi-entity control in one unified platform.
             </p>
           </div>
 
@@ -534,12 +553,33 @@ export function AlphaexploraLandingView() {
 
           <div>
             <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
-              Validate
+              Platform
             </h4>
             <ul className="list-none space-y-4 p-0">
-              <li className="text-[14px] text-brand-text2">Try `test@test.com` for duplicate check</li>
-              <li className="text-[14px] text-brand-text2">Switch Starter to Business for premium unlock</li>
-              <li className="text-[14px] text-brand-text2">Toggle monthly vs annual pricing</li>
+              <li>
+                <a
+                  href="#"
+                  className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
+                >
+                  API Reference
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
+                >
+                  Status Page
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
+                >
+                  Security Policy
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -547,13 +587,21 @@ export function AlphaexploraLandingView() {
             <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
               Contact
             </h4>
-            <p className="text-[14px] leading-relaxed text-brand-text2">
-              Ready for internal review,
-              <br />
-              grading validation,
-              <br />
-              and beta demo walkthroughs.
-            </p>
+            <div className="space-y-4 text-[14px] leading-relaxed text-brand-text2">
+              <p className="flex items-center gap-2">
+                <span className="text-brand-accent">Email:</span> hello@alphaexplora.com
+              </p>
+              <p className="flex items-center gap-2">
+                <span className="text-brand-accent">Phone:</span> +1 (555) 123-4567
+              </p>
+              <p className="flex items-start gap-2">
+                <span className="text-brand-accent">Office:</span> 
+                <span>
+                  123 Fintech Square<br />
+                  San Francisco, CA 94105
+                </span>
+              </p>
+            </div>
           </div>
         </div>
 
