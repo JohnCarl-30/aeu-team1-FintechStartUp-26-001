@@ -90,7 +90,7 @@ export function AlphaexploraLandingView() {
     <div className="snap-container bg-brand-bg text-brand-text">
       {/* Side Dot Navigation */}
       <div className="fixed right-6 top-1/2 z-[60] -translate-y-1/2 flex flex-col gap-4 max-md:hidden">
-        {['hero', 'features', 'pricing', 'premium', 'testimonials', 'waitlist', 'footer'].map((id) => (
+        {['hero', 'features', 'pricing', 'premium', 'testimonials', 'waitlist'].map((id) => (
           <a
             key={id}
             href={`#${id === 'hero' ? '' : id}`}
@@ -428,8 +428,8 @@ export function AlphaexploraLandingView() {
         </div>
       </section>
 
-      <section id="waitlist" ref={waitlistRef} className={`${sectionClass} text-center`}>
-        <div className="mx-auto max-w-[640px] reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+      <section id="waitlist" ref={waitlistRef} className={`${sectionClass} !justify-between gap-12 pt-32 pb-8`}>
+        <div className="mx-auto max-w-[640px] reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out flex-1 flex flex-col justify-center">
           <div className="mb-4 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Beta waitlist
           </div>
@@ -501,124 +501,124 @@ export function AlphaexploraLandingView() {
             </p>
           </div>
         </div>
-      </section>
 
-      <footer id="footer" className={`${shellClass} snap-section border-t border-brand-border pt-20 pb-8 mt-auto`}>
-        <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4">
-          <div className="md:col-span-1">
-            <Link
-              to="/"
-              className="mb-6 block font-head text-[1.4rem] font-extrabold tracking-[-0.02em]"
-            >
-              Alphaexplora<span className="text-brand-accent">.</span>
-            </Link>
-            <p className="text-[13px] leading-relaxed text-brand-text2">
-              The institutional command layer for modern fintech. 
-              Manage global liquidity, risk orchestration, and 
-              automated multi-entity control in one unified platform.
+        <div id="footer" className="w-full border-t border-brand-border pt-16 mt-auto">
+          <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4 text-left">
+            <div className="md:col-span-1">
+              <Link
+                to="/"
+                className="mb-6 block font-head text-[1.4rem] font-extrabold tracking-[-0.02em]"
+              >
+                Alphaexplora<span className="text-brand-accent">.</span>
+              </Link>
+              <p className="text-[13px] leading-relaxed text-brand-text2">
+                The institutional command layer for modern fintech. 
+                Manage global liquidity, risk orchestration, and 
+                automated multi-entity control in one unified platform.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
+                Product
+              </h4>
+              <ul className="list-none space-y-4 p-0">
+                <li>
+                  <a
+                    href="#features"
+                    className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
+                  >
+                    Features
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#pricing"
+                    className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
+                  >
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#premium"
+                    className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
+                  >
+                    Premium access
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
+                Platform
+              </h4>
+              <ul className="list-none space-y-4 p-0">
+                <li>
+                  <a
+                    href="#"
+                    className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
+                  >
+                    API Reference
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
+                  >
+                    Status Page
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
+                  >
+                    Security Policy
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
+                Contact
+              </h4>
+              <div className="space-y-4 text-[14px] leading-relaxed text-brand-text2">
+                <p className="flex items-center gap-2">
+                  <span className="text-brand-accent">Email:</span> hello@alphaexplora.com
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="text-brand-accent">Phone:</span> +1 (555) 123-4567
+                </p>
+                <p className="flex items-start gap-2">
+                  <span className="text-brand-accent">Office:</span> 
+                  <span>
+                    123 Fintech Square<br />
+                    San Francisco, CA 94105
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-brand-border pt-8">
+            <p className="text-[13px] text-brand-text3">
+              © {new Date().getFullYear()} Alphaexplora. All rights reserved.
             </p>
-          </div>
-
-          <div>
-            <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
-              Product
-            </h4>
-            <ul className="list-none space-y-4 p-0">
-              <li>
-                <a
-                  href="#features"
-                  className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
-                >
-                  Features
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#pricing"
-                  className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
-                >
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#premium"
-                  className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
-                >
-                  Premium access
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
-              Platform
-            </h4>
-            <ul className="list-none space-y-4 p-0">
-              <li>
-                <a
-                  href="#"
-                  className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
-                >
-                  API Reference
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
-                >
-                  Status Page
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-[14px] text-brand-text2 transition-colors hover:text-brand-accent"
-                >
-                  Security Policy
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
-              Contact
-            </h4>
-            <div className="space-y-4 text-[14px] leading-relaxed text-brand-text2">
-              <p className="flex items-center gap-2">
-                <span className="text-brand-accent">Email:</span> hello@alphaexplora.com
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="text-brand-accent">Phone:</span> +1 (555) 123-4567
-              </p>
-              <p className="flex items-start gap-2">
-                <span className="text-brand-accent">Office:</span> 
-                <span>
-                  123 Fintech Square<br />
-                  San Francisco, CA 94105
-                </span>
-              </p>
+            <div className="flex gap-8">
+              <a href="#" className="text-[13px] text-brand-text3 transition-colors hover:text-brand-text">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-[13px] text-brand-text3 transition-colors hover:text-brand-text">
+                Terms of Service
+              </a>
             </div>
           </div>
         </div>
-
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-brand-border pt-8 mt-20">
-          <p className="text-[13px] text-brand-text3">
-            © {new Date().getFullYear()} Alphaexplora. All rights reserved.
-          </p>
-          <div className="flex gap-8">
-            <a href="#" className="text-[13px] text-brand-text3 transition-colors hover:text-brand-text">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-[13px] text-brand-text3 transition-colors hover:text-brand-text">
-              Terms of Service
-            </a>
-          </div>
-        </div>
-      </footer>
+      </section>
     </div>
   )
 }
