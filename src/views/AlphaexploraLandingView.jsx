@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { AlphaexploraLandingViewModel, useViewModel } from '../viewModels'
 import { FeatureCard } from '../components/FeatureCard'
 import { PricingCard } from '../components/PricingCard'
+import { ServiceCard } from '../components/ServiceCard'
 import { useAnimatedNumber } from '../hooks/useAnimatedNumber'
 
 export function AlphaexploraLandingView() {
@@ -11,7 +12,7 @@ export function AlphaexploraLandingView() {
   const waitlistRef = useRef(null)
   const [activeSection, setActiveSection] = useState('hero')
   const shellClass = 'mx-auto w-full max-w-[1500px] px-8 max-md:px-4'
-  const sectionClass = `${shellClass} snap-section border-t border-brand-border py-12`
+  const sectionClass = `${shellClass} snap-section border-t border-brand-border py-24 max-md:py-16`
   const navigationItems = [
     { href: '#features', label: 'Features' },
     { href: '#pricing', label: 'Pricing' },
@@ -46,7 +47,7 @@ export function AlphaexploraLandingView() {
           if (entry.isIntersecting) {
             entry.target.classList.add('opacity-100', 'translate-y-0')
             entry.target.classList.remove('opacity-0', 'translate-y-[30px]')
-            
+
             if (entry.target.id) {
               setActiveSection(entry.target.id)
             }
@@ -58,7 +59,7 @@ export function AlphaexploraLandingView() {
 
     const sections = document.querySelectorAll('.snap-section')
     const revealElements = document.querySelectorAll('.reveal')
-    
+
     sections.forEach((section) => observer.observe(section))
     revealElements.forEach((element) => observer.observe(element))
 
@@ -110,7 +111,7 @@ export function AlphaexploraLandingView() {
         ))}
       </div>
 
-      <nav id="top" className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-brand-border bg-[rgba(15,23,42,0.72)] backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards]">
+      <nav id="top" className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-brand-border bg-[rgba(11,22,40,0.72)] backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards]">
         <div className={`${shellClass} flex h-full items-center justify-between gap-6`}>
           <div className="flex items-center gap-3">
             <Link
@@ -157,25 +158,24 @@ export function AlphaexploraLandingView() {
         <div className="pointer-events-none absolute right-[8%] top-[12%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(110,231,183,0.2)_0%,transparent_68%)] blur-2xl"></div>
         <div className="pointer-events-none absolute left-[8%] top-[18%] h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.14)_0%,transparent_72%)] blur-3xl"></div>
 
-        <div className={`${shellClass} relative flex min-h-[calc(100vh-4rem)] flex-col justify-center py-16`}>
-          <div className="max-w-[860px]">
+        <div className={`${shellClass} relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center py-16`} >
+          <div className="max-w-[860px] text-center mx-auto">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(110,231,183,0.28)] bg-brand-accent-dim2 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent animate-fade-up opacity-0 [animation-fill-mode:forwards]">
               <div className="h-1.5 w-1.5 rounded-full bg-brand-accent animate-[pulse_2.6s_infinite]"></div>
               Fintech workflow platform
             </div>
 
-            <h1 className="mb-6 max-w-[12ch] font-head text-[clamp(3rem,6vw,5.4rem)] font-extrabold leading-[0.98] tracking-[-0.05em] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:120ms]">
+            <h1 className="mb-6 max-w-[12ch] font-head text-[clamp(3rem,6vw,5.4rem)] font-extrabold leading-[1.1] tracking-[-0.05em] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:120ms] text-center">
               Built to earn trust from the first scroll.
             </h1>
 
             <p className="max-w-[760px] text-[clamp(1rem,1.5vw,1.16rem)] leading-[1.8] text-brand-text2 animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:220ms]">
-              Alphaexplora provides a unified institutional command layer for treasury,
-              risk orchestration, and global compliance. Our platform empowers 
-              modern fintech teams to scale with confidence through real-time 
+              Our platform empowers
+              modern fintech teams to scale with confidence through real-time
               visibility and automated multi-entity control.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:320ms] max-sm:flex-col">
+            <div className="mt-10 flex flex-wrap justify-center gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:320ms] max-sm:flex-col">
               <a
                 href="#pricing"
                 className="rounded-brand-sm bg-brand-accent px-7 py-3.5 text-center text-[15px] font-semibold text-[#052e16] transition-all duration-200 hover:-translate-y-[1px] hover:opacity-90"
@@ -191,12 +191,12 @@ export function AlphaexploraLandingView() {
             </div>
           </div>
 
-          <div className="mt-14 w-full overflow-hidden border border-brand-border bg-[rgba(15,23,42,0.72)] backdrop-blur-md reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+          <div className="mt-14 w-full overflow-hidden border border-brand-border bg-[rgba(11,22,40,0.72)] backdrop-blur-md reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
             <div className="flex w-full max-md:flex-col">
               {state.stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="flex flex-1 basis-0 flex-col justify-center border-r border-brand-border bg-[rgba(15,23,42,0.9)] px-6 py-8 last:border-r-0 max-md:basis-auto max-md:border-r-0 max-md:border-b last:max-md:border-b-0"
+                  className="flex flex-1 basis-0 flex-col justify-center border-r border-brand-border bg-[rgba(11,22,40,0.9)] px-6 py-8 last:border-r-0 max-md:basis-auto max-md:border-r-0 max-md:border-b last:max-md:border-b-0"
                 >
                   <div className="mb-2 font-head text-[clamp(2.4rem,4vw,4.4rem)] font-extrabold tracking-[-0.05em] text-brand-text">
                     {stat.value}
@@ -209,7 +209,7 @@ export function AlphaexploraLandingView() {
             </div>
           </div>
         </div>
-      </header>
+      </header >
 
       <section id="features" className={sectionClass}>
         <div className="mb-16 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
@@ -241,7 +241,7 @@ export function AlphaexploraLandingView() {
             Transparent institutional pricing for teams of all sizes.
           </h2>
           <p className="mx-auto max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
-            Choose the plan that fits your current scale and unlock more 
+            Choose the plan that fits your current scale and unlock more
             advanced capabilities as your organization grows.
           </p>
 
@@ -265,9 +265,9 @@ export function AlphaexploraLandingView() {
           </div>
         </div>
 
-          <div className="mb-12 text-center text-[15px] leading-[1.6] text-brand-text3">
-            Switching plans will immediately update your workspace and feature access.
-          </div>
+        <div className="mb-12 text-center text-[15px] leading-[1.6] text-brand-text3">
+          Switching plans will immediately update your workspace and feature access.
+        </div>
 
         {state.subscriptionError ? (
           <div className="mb-8 rounded-brand border border-brand-red/40 bg-[rgba(248,113,113,0.08)] px-4 py-3 text-sm text-brand-red">
@@ -308,13 +308,21 @@ export function AlphaexploraLandingView() {
             Unlock advanced institutional tools with a premium subscription.
           </h2>
           <p className="max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
-            Get access to global multi-entity support, direct bank connectivity, 
+            Get access to global multi-entity support, direct bank connectivity,
             and white-glove implementation services.
           </p>
         </div>
 
-        {vm.isUnlockedVisible ? (
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4">
+        <div className="relative">
+          {!vm.isUnlockedVisible && (
+            <div className="absolute inset-x-0 -top-8 z-10 flex justify-center">
+              <div className="rounded-full border border-brand-accent/30 bg-brand-bg2/80 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-brand-accent backdrop-blur-md shadow-xl">
+                Upgrade to Business to Unlock
+              </div>
+            </div>
+          )}
+
+          <div className={`grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4 transition-all duration-700 ${!vm.isUnlockedVisible ? 'grayscale opacity-40 blur-[1px] pointer-events-none' : ''}`}>
             {state.unlockedFeatures.map((feature) => (
               <article
                 key={feature.title}
@@ -322,7 +330,7 @@ export function AlphaexploraLandingView() {
               >
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-[linear-gradient(90deg,var(--color-brand-accent),rgba(59,130,246,0.7))]"></div>
                 <div className="mb-4 inline-flex rounded-full border border-brand-accent/20 bg-brand-accent/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-accent">
-                  Unlocked
+                  {vm.isUnlockedVisible ? 'Unlocked' : 'Premium'}
                 </div>
                 <h3 className="mb-2 font-head text-[1.05rem] font-semibold tracking-[-0.01em]">
                   {feature.title}
@@ -333,17 +341,9 @@ export function AlphaexploraLandingView() {
               </article>
             ))}
           </div>
-        ) : (
-          <div className="reveal rounded-brand border border-brand-border bg-[rgba(15,23,42,0.62)] px-6 py-6 opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-            <div className="mb-2 font-head text-[1.2rem] font-semibold tracking-[-0.02em]">
-              Premium institutional features are currently locked.
-            </div>
-            <p className="text-sm leading-[1.7] text-brand-text2">
-              Please upgrade to a Business or Enterprise plan to gain access 
-              to our global command layer and advanced automation tools.
-            </p>
-          </div>
-        )}
+        </div>
+
+
       </section>
 
       <section id="testimonials" className={sectionClass}>
@@ -428,7 +428,7 @@ export function AlphaexploraLandingView() {
         </div>
       </section>
 
-      <section id="waitlist" ref={waitlistRef} className={`${sectionClass} !justify-between gap-12 pt-32 pb-8`}>
+      <section id="waitlist" ref={waitlistRef} className={sectionClass}>
         <div className="mx-auto max-w-[640px] reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out flex-1 flex flex-col justify-center">
           <div className="mb-4 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Beta waitlist
@@ -496,13 +496,13 @@ export function AlphaexploraLandingView() {
             )}
 
             <p className="mt-8 text-xs text-brand-text2">
-              Privacy is our priority. Your data is handled according to our 
+              Privacy is our priority. Your data is handled according to our
               institutional security standards. No marketing spam, ever.
             </p>
           </div>
         </div>
 
-        <div id="footer" className="w-full border-t border-brand-border pt-16 mt-auto">
+        <div id="footer" className="w-full border-t border-brand-border pt-16 mt-32">
           <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4 text-left">
             <div className="md:col-span-1">
               <Link
@@ -512,8 +512,8 @@ export function AlphaexploraLandingView() {
                 Alphaexplora<span className="text-brand-accent">.</span>
               </Link>
               <p className="text-[13px] leading-relaxed text-brand-text2">
-                The institutional command layer for modern fintech. 
-                Manage global liquidity, risk orchestration, and 
+                The institutional command layer for modern fintech.
+                Manage global liquidity, risk orchestration, and
                 automated multi-entity control in one unified platform.
               </p>
             </div>
@@ -594,7 +594,7 @@ export function AlphaexploraLandingView() {
                   <span className="text-brand-accent">Phone:</span> +1 (555) 123-4567
                 </p>
                 <p className="flex items-start gap-2">
-                  <span className="text-brand-accent">Office:</span> 
+                  <span className="text-brand-accent">Office:</span>
                   <span>
                     123 Fintech Square<br />
                     San Francisco, CA 94105
@@ -604,7 +604,7 @@ export function AlphaexploraLandingView() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-brand-border pt-8">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-brand-border pt-8 mt-auto">
             <p className="text-[13px] text-brand-text3">
               © {new Date().getFullYear()} Alphaexplora. All rights reserved.
             </p>
@@ -619,6 +619,26 @@ export function AlphaexploraLandingView() {
           </div>
         </div>
       </section>
-    </div>
+
+      {/* Floating Concierge Button */}
+      {
+        vm.isConciergeAvailable && (
+          <button
+            type="button"
+            className="fixed bottom-8 right-8 z-[70] flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-[#052e16] shadow-[0_8px_32px_rgba(110,231,183,0.4)] transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_48px_rgba(110,231,183,0.6)] animate-fade-in"
+            aria-label="Contact Concierge"
+            onClick={() => alert('Opening Secure Concierge Channel...')}
+          >
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            <div className="absolute -top-1 -right-1 flex h-4 w-4">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-amber opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-4 w-4 bg-brand-amber"></span>
+            </div>
+          </button>
+        )
+      }
+    </div >
   )
 }

@@ -2,10 +2,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-bg: #0f172a;
-  --color-brand-bg2: #1e293b;
-  --color-brand-bg3: #334155;
-  --color-brand-bg4: #475569;
+  --color-brand-bg: #0b1628;
+  --color-brand-bg2: #111f35;
+  --color-brand-bg3: #1a2e47;
+  --color-brand-bg4: #243d5c;
   --color-brand-border: rgba(255, 255, 255, 0.1);
   --color-brand-border2: rgba(255, 255, 255, 0.15);
   --color-brand-text: #f8fafc;
@@ -69,8 +69,7 @@
     height: 100%;
     overflow: hidden;
     background-image:
-      radial-gradient(circle at top, rgba(110, 231, 183, 0.12), transparent 34%),
-      linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 1));
+      linear-gradient(180deg, rgba(11, 22, 40, 1), rgba(11, 22, 40, 1));
     @apply bg-brand-bg text-brand-text font-body text-base leading-relaxed;
   }
 

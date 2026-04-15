@@ -76,6 +76,48 @@ const landingPageContent = {
       description:
         'Connect directly to major global banks for automated reconciliation and execution.',
     },
+    {
+      title: 'SSO & Advanced Governance',
+      description:
+        'Enterprise-grade identity management with Okta/Azure AD integration and custom audit policies.',
+    },
+    {
+      title: 'Predictive Cash Forecasting',
+      description:
+        'AI-driven liquidity projections based on historical transaction patterns and market trends.',
+    },
+    {
+      title: 'White-Glove Implementation',
+      description:
+        'Dedicated technical consultants to assist with complex architecture design and data migrations.',
+    },
+    {
+      title: 'Private Cloud Deployment',
+      description:
+        'Deploy the entire Alphaexplora stack within your own VPC for maximum data sovereignty and security.',
+    },
+  ],
+  premiumServices: [
+    {
+      title: 'Dedicated Solutions Architect',
+      description: 'Human-led architectural design and ongoing technical optimization for global scale.',
+      icon: 'SA'
+    },
+    {
+      title: '24/7 Priority Support Desk',
+      description: 'Exclusive access to our senior engineering team with sub-10 minute response times.',
+      icon: 'PS'
+    },
+    {
+      title: 'Managed Compliance Audits',
+      description: 'Proactive internal auditing and regulatory readiness reporting for multiple jurisdictions.',
+      icon: 'CA'
+    },
+    {
+      title: 'Custom Liquidity Pipelines',
+      description: 'Tailored data flows and execution paths designed for your specific institutional needs.',
+      icon: 'LP'
+    }
   ],
   plans: [
     {
@@ -126,9 +168,10 @@ const landingPageContent = {
       features: [
         'Everything in Business',
         'Custom workflow builder',
-        'On-premise deployment',
+        'On-premise / Private Cloud',
         'Direct bank connectivity',
         'Compliance autopilot',
+        'White-Glove Implementation',
         'Named success manager',
       ],
     },

@@ -28,6 +28,7 @@ export class AlphaexploraLandingViewModel extends BaseViewModel {
       logos: content.logos,
       features: AlphaexploraFeature.fromJSONArray(content.features),
       unlockedFeatures: AlphaexploraFeature.fromJSONArray(content.unlockedFeatures),
+      premiumServices: content.premiumServices || [],
       plans: AlphaexploraPlan.fromJSONArray(content.plans),
       testimonials: AlphaexploraTestimonial.fromJSONArray(content.testimonials),
       pricingMode: initialSubscription.billingCycle,
@@ -51,6 +52,10 @@ export class AlphaexploraLandingViewModel extends BaseViewModel {
 
   get isUnlockedVisible() {
     return this.state.subscriptionStatus.hasActiveSubscription
+  }
+
+  get isConciergeAvailable() {
+    return this.state.subscriptionStatus.accessTier === 'premium'
   }
 
   getPlanByName(planName) {
