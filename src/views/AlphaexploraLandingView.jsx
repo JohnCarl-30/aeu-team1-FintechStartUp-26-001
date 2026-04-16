@@ -195,7 +195,7 @@ export function AlphaexploraLandingView() {
             Features
           </div>
           <h2 className="mb-3 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Unparalleled institutional capabilities designed for the modern era.
+            Enterprise-grade capabilities built for modern fintech teams.
           </h2>
           <p className="max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
             Built from the ground up for performance, security, and global scale.
@@ -253,28 +253,32 @@ export function AlphaexploraLandingView() {
           </div>
         ) : null}
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] items-start gap-4 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          {state.plans.map((plan) => {
-            const displayedPrice =
-              plan.name === 'Starter'
-                ? displayedStarterPrice
-                : plan.name === 'Business'
-                  ? displayedBusinessPrice
-                  : null
+        <div className="mx-auto max-w-[1100px] overflow-hidden rounded-brand border border-brand-border bg-brand-bg2 shadow-2xl reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+          <div className="flex w-full flex-col md:flex-row">
+            {state.plans.map((plan, index) => {
+              const displayedPrice =
+                plan.name === 'Starter'
+                  ? displayedStarterPrice
+                  : plan.name === 'Business'
+                    ? displayedBusinessPrice
+                    : null
 
-            return (
-              <PricingCard
-                key={plan.name}
-                plan={plan}
-                pricingMode={state.pricingMode}
-                displayedPrice={displayedPrice}
-                isSelected={state.selectedPlan === plan.name}
-                isDisabled={state.isSubscriptionLoading || state.isSubscriptionSaving}
-                onSelect={(planName) => vm.selectPlan(planName)}
-              />
-            )
-          })}
+              return (
+                <PricingCard
+                  key={plan.name}
+                  plan={plan}
+                  pricingMode={state.pricingMode}
+                  displayedPrice={displayedPrice}
+                  isSelected={state.selectedPlan === plan.name}
+                  isDisabled={state.isSubscriptionLoading || state.isSubscriptionSaving}
+                  onSelect={(planName) => vm.selectPlan(planName)}
+                  isLast={index === state.plans.length - 1}
+                />
+              )
+            })}
+          </div>
         </div>
+
       </section>
 
       <section id="premium" ref={premiumRef} className={sectionClass}>
