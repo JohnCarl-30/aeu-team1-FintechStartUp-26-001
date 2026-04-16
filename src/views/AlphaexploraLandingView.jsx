@@ -12,7 +12,7 @@ export function AlphaexploraLandingView() {
   const waitlistRef = useRef(null)
   const [activeSection, setActiveSection] = useState('hero')
   const shellClass = 'mx-auto w-full max-w-[1500px] px-8 max-md:px-4'
-  const sectionClass = `${shellClass} snap-section py-10 max-md:py-6`
+  const sectionClass = `${shellClass} snap-section border-t border-brand-border py-10 max-md:py-6 relative overflow-hidden`
   const navigationItems = [
     { href: '#features', label: 'Features' },
     { href: '#pricing', label: 'Pricing' },
@@ -192,7 +192,11 @@ export function AlphaexploraLandingView() {
         </div>
       </header >
 
-      <section id="features" className={sectionClass.replace('border-t border-brand-border', 'border-t-0')}>
+      <section id="features" className={sectionClass}>
+        <div 
+          className="pointer-events-none absolute inset-0 bg-[length:40px_40px] opacity-[0.15] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black_10%,transparent_100%)]"
+          style={{ backgroundImage: 'linear-gradient(to right, var(--color-brand-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-border) 1px, transparent 1px)' }}
+        ></div>
         <div className="mb-12 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Features
@@ -214,6 +218,10 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="pricing" className={sectionClass}>
+        <div 
+          className="pointer-events-none absolute inset-0 bg-[length:40px_40px] opacity-[0.15] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black_10%,transparent_100%)]"
+          style={{ backgroundImage: 'linear-gradient(to right, var(--color-brand-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-border) 1px, transparent 1px)' }}
+        ></div>
         <div className="mb-6 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Pricing
@@ -286,6 +294,10 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="premium" ref={premiumRef} className={`${sectionClass} bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)]`}>
+        <div 
+          className="pointer-events-none absolute inset-0 bg-[length:40px_40px] opacity-[0.15] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black_10%,transparent_100%)]"
+          style={{ backgroundImage: 'linear-gradient(to right, var(--color-brand-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-border) 1px, transparent 1px)' }}
+        ></div>
         <div className="mb-12 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Premium unlocks
@@ -323,6 +335,10 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="testimonials" className={sectionClass}>
+        <div 
+          className="pointer-events-none absolute inset-0 bg-[length:40px_40px] opacity-[0.15] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black_10%,transparent_100%)]"
+          style={{ backgroundImage: 'linear-gradient(to right, var(--color-brand-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-border) 1px, transparent 1px)' }}
+        ></div>
         <div className="mb-12 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Testimonials
@@ -408,6 +424,10 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="waitlist" ref={waitlistRef} className={sectionClass}>
+        <div 
+          className="pointer-events-none absolute inset-0 bg-[length:40px_40px] opacity-[0.15] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black_10%,transparent_100%)]"
+          style={{ backgroundImage: 'linear-gradient(to right, var(--color-brand-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-border) 1px, transparent 1px)' }}
+        ></div>
         <div className="mx-auto max-w-[640px] reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out flex-1 flex flex-col justify-center">
           <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Beta waitlist
