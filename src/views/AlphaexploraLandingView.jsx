@@ -190,20 +190,20 @@ export function AlphaexploraLandingView() {
       </header >
 
       <section id="features" className={sectionClass}>
-        <div className="mb-6 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+        <div className="mb-12 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Features
           </div>
-          <h2 className="mb-3 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Enterprise-grade capabilities built for modern fintech teams.
+          <h2 className="mx-auto mb-4 max-w-[900px] font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+            Unparalleled institutional capabilities designed for the modern era.
           </h2>
-          <p className="max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
+          <p className="mx-auto max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
             Built from the ground up for performance, security, and global scale.
             Our infrastructure supports the most demanding fintech workloads.
           </p>
         </div>
 
-        <div className="reveal grid grid-cols-1 gap-[1px] overflow-hidden rounded-brand border border-brand-border bg-brand-border opacity-0 translate-y-[30px] transition-all duration-600 ease-out md:grid-cols-2 xl:grid-cols-3">
+        <div className="reveal mx-auto max-w-[1340px] grid grid-cols-1 gap-[2px] overflow-hidden rounded-brand border border-brand-border bg-brand-border opacity-0 translate-y-[30px] transition-all duration-600 ease-out md:grid-cols-2 xl:grid-cols-3">
           {state.features.map((feature) => (
             <FeatureCard key={feature.title} feature={feature} />
           ))}
@@ -253,7 +253,7 @@ export function AlphaexploraLandingView() {
           </div>
         ) : null}
 
-        <div className="mx-auto max-w-[1240px] rounded-brand border border-brand-border bg-brand-bg2 shadow-2xl reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+        <div className="mx-auto max-w-[1340px] rounded-brand border border-brand-border bg-brand-bg2 shadow-2xl reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="flex w-full flex-col md:flex-row">
             {state.plans.map((plan, index) => {
               const displayedPrice =
@@ -282,15 +282,15 @@ export function AlphaexploraLandingView() {
 
       </section>
 
-      <section id="premium" ref={premiumRef} className={sectionClass}>
-        <div className="mb-6 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+      <section id="premium" ref={premiumRef} className={`${sectionClass} bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)]`}>
+        <div className="mb-12 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Premium unlocks
           </div>
-          <h2 className="mb-3 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+          <h2 className="mx-auto mb-4 max-w-[900px] font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Unlock advanced institutional tools with a premium subscription.
           </h2>
-          <p className="max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
+          <p className="mx-auto max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
             Get access to global multi-entity support, direct bank connectivity,
             and white-glove implementation services.
           </p>
@@ -305,7 +305,7 @@ export function AlphaexploraLandingView() {
             </div>
           )}
 
-          <div className={`grid grid-cols-1 gap-4 transition-all duration-700 md:grid-cols-2 lg:grid-cols-4 ${!vm.isUnlockedVisible ? 'grayscale opacity-40 blur-[1px] pointer-events-none' : ''}`}>
+          <div className={`mx-auto max-w-[1340px] grid grid-cols-1 gap-6 transition-all duration-700 md:grid-cols-2 lg:grid-cols-4 ${!vm.isUnlockedVisible ? 'grayscale opacity-40 blur-[1px] pointer-events-none' : ''}`}>
             {state.unlockedFeatures.map((feature) => (
               <ServiceCard
                 key={feature.title}
@@ -320,13 +320,16 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="testimonials" className={sectionClass}>
-        <div className="mb-6 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+        <div className="mb-12 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Testimonials
           </div>
-          <h2 className="mb-3 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            A simple testimonial slider keeps the long-scroll page interactive.
+          <h2 className="mx-auto mb-4 max-w-[900px] font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+            Trust from world-class financial engineering teams.
           </h2>
+          <p className="mx-auto max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
+            See why leading fintechs choose our platform to power their core operations.
+          </p>
         </div>
 
         <div
