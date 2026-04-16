@@ -89,28 +89,6 @@ export function AlphaexploraLandingView() {
 
   return (
     <div className="snap-container bg-brand-bg text-brand-text">
-      {/* Side Dot Navigation */}
-      <div className="fixed right-6 top-1/2 z-[60] -translate-y-1/2 flex flex-col gap-4 max-md:hidden">
-        {['hero', 'features', 'pricing', 'premium', 'testimonials', 'waitlist'].map((id) => (
-          <a
-            key={id}
-            href={`#${id === 'hero' ? '' : id}`}
-            className="group relative flex items-center justify-center p-2"
-            aria-label={`Jump to ${id}`}
-            onClick={(e) => {
-              e.preventDefault()
-              document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-              setActiveSection(id)
-            }}
-          >
-            <div className={`h-1.5 rounded-full transition-all duration-300 ${activeSection === id ? 'w-6 bg-brand-accent' : 'w-1.5 bg-brand-text/20 group-hover:bg-brand-accent group-hover:scale-125'}`}></div>
-            <div className={`absolute right-8 scale-0 bg-brand-bg2 border border-brand-border px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-brand-accent transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 ${activeSection === id ? 'scale-100 opacity-100' : 'opacity-0'}`}>
-              {id}
-            </div>
-          </a>
-        ))}
-      </div>
-
       <nav id="top" className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-brand-border bg-[rgba(11,22,40,0.72)] backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards]">
         <div className={`${shellClass} flex h-full items-center justify-between gap-6`}>
           <div className="flex items-center gap-3">
@@ -322,23 +300,13 @@ export function AlphaexploraLandingView() {
             </div>
           )}
 
-          <div className={`grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4 transition-all duration-700 ${!vm.isUnlockedVisible ? 'grayscale opacity-40 blur-[1px] pointer-events-none' : ''}`}>
+          <div className={`grid grid-cols-1 gap-6 transition-all duration-700 md:grid-cols-2 lg:grid-cols-4 ${!vm.isUnlockedVisible ? 'grayscale opacity-40 blur-[1px] pointer-events-none' : ''}`}>
             {state.unlockedFeatures.map((feature) => (
-              <article
+              <ServiceCard
                 key={feature.title}
-                className="reveal relative overflow-hidden rounded-brand border border-[rgba(110,231,183,0.18)] bg-[linear-gradient(135deg,rgba(110,231,183,0.06),rgba(59,130,246,0.04))] p-7 opacity-0 translate-y-[30px] transition-all duration-600 ease-out"
-              >
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-[linear-gradient(90deg,var(--color-brand-accent),rgba(59,130,246,0.7))]"></div>
-                <div className="mb-4 inline-flex rounded-full border border-brand-accent/20 bg-brand-accent/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-accent">
-                  {vm.isUnlockedVisible ? 'Unlocked' : 'Premium'}
-                </div>
-                <h3 className="mb-2 font-head text-[1.05rem] font-semibold tracking-[-0.01em]">
-                  {feature.title}
-                </h3>
-                <p className="text-sm leading-[1.7] text-brand-text2">
-                  {feature.description}
-                </p>
-              </article>
+                service={feature}
+                isLocked={!vm.isUnlockedVisible}
+              />
             ))}
           </div>
         </div>
@@ -502,7 +470,7 @@ export function AlphaexploraLandingView() {
           </div>
         </div>
 
-        <div id="footer" className="w-full border-t border-brand-border pt-16 mt-32">
+        <div id="footer" className="w-full border-t border-brand-border pt-12 mt-16 pb-0 flex flex-col">
           <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4 text-left">
             <div className="md:col-span-1">
               <Link
@@ -604,7 +572,7 @@ export function AlphaexploraLandingView() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-brand-border pt-8 mt-auto">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-brand-border pt-2 mt-auto pb-2">
             <p className="text-[13px] text-brand-text3">
               © {new Date().getFullYear()} Alphaexplora. All rights reserved.
             </p>

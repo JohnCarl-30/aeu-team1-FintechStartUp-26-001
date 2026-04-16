@@ -1,3 +1,5 @@
+import { supabase } from '../database/supabase'
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api'
 
 export const DUPLICATE_WAITLIST_MESSAGE = 'This email is already registered'
@@ -57,42 +59,26 @@ const landingPageContent = {
   ],
   unlockedFeatures: [
     {
+      icon: 'GE',
       title: 'Global multi-entity support',
       description:
         'Consolidate reporting and operations across an unlimited number of international subsidiaries.',
     },
     {
-      title: 'Premium institutional support',
-      description:
-        '24/7 dedicated account management with a guaranteed 15-minute response time SLA.',
-    },
-    {
-      title: 'Advanced custom workflows',
-      description:
-        'Design complex multi-stage approvals with conditional logic and external data enrichment.',
-    },
-    {
+      icon: 'BI',
       title: 'Direct banking integrations',
       description:
         'Connect directly to major global banks for automated reconciliation and execution.',
     },
     {
-      title: 'SSO & Advanced Governance',
+      icon: 'CW',
+      title: 'Advanced custom workflows',
       description:
-        'Enterprise-grade identity management with Okta/Azure AD integration and custom audit policies.',
+        'Design complex multi-stage approvals with conditional logic and external data enrichment.',
     },
     {
-      title: 'Predictive Cash Forecasting',
-      description:
-        'AI-driven liquidity projections based on historical transaction patterns and market trends.',
-    },
-    {
-      title: 'White-Glove Implementation',
-      description:
-        'Dedicated technical consultants to assist with complex architecture design and data migrations.',
-    },
-    {
-      title: 'Private Cloud Deployment',
+      icon: 'PC',
+      title: 'Private cloud deployment',
       description:
         'Deploy the entire Alphaexplora stack within your own VPC for maximum data sovereignty and security.',
     },
@@ -305,13 +291,20 @@ export function createSubscriptionSnapshot({
 
 export async function fetchSubscriptionState() {
   try {
-    return await apiRequest('/subscription')
+    const { data, error } = await supabase
+      .from('app_state')
+      .select('value')
+      .eq('key', 'subscription')
+      .single()
+
+    if (error) throw error
+    return data.value
   } catch (error) {
-    if (isNetworkError(error)) {
+    try {
+      return await apiRequest('/subscription')
+    } catch (apiError) {
       return readStoredSubscription()
     }
-
-    throw error
   }
 }
 
@@ -319,20 +312,23 @@ export async function updateSubscriptionState(subscriptionInput = {}) {
   const nextSnapshot = createSubscriptionSnapshot(subscriptionInput)
 
   try {
-    const response = await apiRequest('/subscription', {
+    const { error } = await supabase
+      .from('app_state')
+      .upsert({ key: 'subscription', value: nextSnapshot }, { onConflict: 'key' })
+
+    if (error) throw error
+
+    // Sync with local API if available
+    apiRequest('/subscription', {
       method: 'POST',
       body: JSON.stringify(nextSnapshot),
-    })
+    }).catch(() => {})
 
-    writeStoredSubscription(response)
-    return response
+    writeStoredSubscription(nextSnapshot)
+    return nextSnapshot
   } catch (error) {
-    if (isNetworkError(error)) {
-      writeStoredSubscription(nextSnapshot)
-      return nextSnapshot
-    }
-
-    throw error
+    writeStoredSubscription(nextSnapshot)
+    return nextSnapshot
   }
 }
 
@@ -348,12 +344,29 @@ export async function submitWaitlistEmail(email) {
   }
 
   try {
-    return await apiRequest('/waitlist', {
+    const { error } = await supabase
+      .from('waitlist')
+      .insert({ email: normalizedEmail })
+
+    if (error) {
+      if (error.code === '23505') {
+        throw new Error(DUPLICATE_WAITLIST_MESSAGE)
+      }
+      throw error
+    }
+
+    // Sync with local API if available
+    apiRequest('/waitlist', {
       method: 'POST',
       body: JSON.stringify({ email: normalizedEmail }),
-    })
+    }).catch(() => {})
+
+    return {
+      success: true,
+      email: normalizedEmail,
+    }
   } catch (error) {
-    if (!isNetworkError(error)) {
+    if (error.message === DUPLICATE_WAITLIST_MESSAGE) {
       throw error
     }
 
