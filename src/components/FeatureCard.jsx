@@ -1,11 +1,13 @@
 export function FeatureCard({ feature }) {
   return (
-    <article className="bg-brand-bg p-10 transition-colors duration-200 hover:bg-brand-bg2 max-sm:p-8">
-      <div className="w-11 h-11 bg-brand-accent-dim2 rounded-brand-sm text-[0.8rem] font-bold tracking-[0.08em] text-brand-accent mb-6 flex items-center justify-center" aria-hidden="true">
-        {feature.icon}
+    <article className="group bg-brand-bg p-8 transition-all duration-300 hover:bg-brand-bg2 hover:scale-[1.02] border border-transparent hover:border-brand-accent/20 max-sm:p-6">
+      <div className="w-12 h-12 bg-gradient-to-br from-brand-accent/20 to-brand-accent/5 rounded-brand flex items-center justify-center mb-5 border border-brand-accent/20">
+        <span className="text-sm font-bold tracking-wider text-brand-accent">
+          {feature.icon}
+        </span>
       </div>
-      <h3 className="font-head text-[1.1rem] font-semibold mb-[0.6rem] tracking-[-0.01em]">{feature.title}</h3>
-      <p className="text-[14px] leading-relaxed text-brand-text2">{feature.description}</p>
+      <h3 className="font-head text-[1.15rem] font-semibold mb-3 tracking-[-0.01em] text-brand-text group-hover:text-brand-accent transition-colors">{feature.title}</h3>
+      <p className="text-[14px] leading-[1.7] text-brand-text2">{feature.description}</p>
     </article>
   )
 }

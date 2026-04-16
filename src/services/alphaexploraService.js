@@ -13,95 +13,90 @@ const DEFAULT_WAITLIST_EMAILS = [
 
 const landingPageContent = {
   pageTitle: 'Alphaexplora - Institutional Fintech Command Center',
-  stats: [
-    { value: '99.99%', label: 'Infrastructure uptime' },
-    { value: '45%', label: 'Efficiency gain in approvals' },
-    { value: '2,500+', label: 'Enterprise organizations' },
-    { value: '<50ms', label: 'Edge latency' },
-  ],
+
   features: [
     {
       icon: 'TR',
-      title: 'Treasury management',
+      title: 'Treasury Management',
       description:
-        'Manage global liquidity across multiple entities and currencies with real-time positioning.',
+        'Command your global liquidity with real-time visibility across all entities and currencies.',
     },
     {
       icon: 'RM',
-      title: 'Risk orchestration',
+      title: 'Risk Orchestration',
       description:
-        'Unified risk monitoring engine that flags anomalies and policy violations automatically.',
+        'Automated risk monitoring that surfaces anomalies and policy breaches before they escalate.',
     },
     {
       icon: 'LD',
-      title: 'Ledger-as-a-service',
+      title: 'Ledger-as-a-Service',
       description:
-        'High-performance immutable ledger for high-volume transaction processing and accounting.',
+        'Audit-ready, immutable ledger infrastructure built for high-throughput financial operations.',
     },
     {
       icon: 'AN',
-      title: 'Predictive analytics',
+      title: 'Predictive Analytics',
       description:
-        'Leverage historical data to forecast cash flow, churn, and operational bottlenecks.',
+        'Turn historical patterns into actionable forecasts for cash flow, churn, and capacity planning.',
     },
     {
       icon: 'CO',
-      title: 'Compliance autopilot',
+      title: 'Compliance Autopilot',
       description:
-        'Automated KYC, AML, and regulatory reporting tailored to global jurisdictions.',
+        'Stay ahead of KYC, AML, and multi-jurisdiction regulatory requirements without the overhead.',
     },
     {
       icon: 'EX',
-      title: 'Open API ecosystem',
+      title: 'Open API Ecosystem',
       description:
-        'Integrate seamlessly with your existing stack via our developer-first API and SDKs.',
+        'Developer-first APIs and SDKs designed for seamless integration with your existing tech stack.',
     },
   ],
   unlockedFeatures: [
     {
       icon: 'GE',
-      title: 'Global multi-entity support',
+      title: 'Global Multi-Entity Support',
       description:
-        'Consolidate reporting and operations across an unlimited number of international subsidiaries.',
+        'Consolidate reporting and operations across unlimited international subsidiaries from one dashboard.',
     },
     {
       icon: 'BI',
-      title: 'Direct banking integrations',
+      title: 'Direct Banking Integrations',
       description:
-        'Connect directly to major global banks for automated reconciliation and execution.',
+        'Connect directly to major global banks for real-time reconciliation and automated payment execution.',
     },
     {
       icon: 'CW',
-      title: 'Advanced custom workflows',
+      title: 'Advanced Custom Workflows',
       description:
-        'Design complex multi-stage approvals with conditional logic and external data enrichment.',
+        'Design complex multi-stage approval chains with conditional logic and external data enrichment.',
     },
     {
       icon: 'PC',
-      title: 'Private cloud deployment',
+      title: 'Private Cloud Deployment',
       description:
-        'Deploy the entire Alphaexplora stack within your own VPC for maximum data sovereignty and security.',
+        'Deploy within your own VPC for maximum data sovereignty, security, and compliance control.',
     },
   ],
   premiumServices: [
     {
       title: 'Dedicated Solutions Architect',
-      description: 'Human-led architectural design and ongoing technical optimization for global scale.',
+      description: 'Expert-led architectural design and continuous optimization to accelerate your global growth.',
       icon: 'SA'
     },
     {
       title: '24/7 Priority Support Desk',
-      description: 'Exclusive access to our senior engineering team with sub-10 minute response times.',
+      description: 'Direct line to our senior engineering team with guaranteed sub-10 minute response SLA.',
       icon: 'PS'
     },
     {
       title: 'Managed Compliance Audits',
-      description: 'Proactive internal auditing and regulatory readiness reporting for multiple jurisdictions.',
+      description: 'Proactive internal auditing and regulatory readiness reports across multiple jurisdictions.',
       icon: 'CA'
     },
     {
       title: 'Custom Liquidity Pipelines',
-      description: 'Tailored data flows and execution paths designed for your specific institutional needs.',
+      description: 'Tailored data flows and execution paths engineered for your unique institutional workflows.',
       icon: 'LP'
     }
   ],
@@ -322,7 +317,7 @@ export async function updateSubscriptionState(subscriptionInput = {}) {
     apiRequest('/subscription', {
       method: 'POST',
       body: JSON.stringify(nextSnapshot),
-    }).catch(() => {})
+    }).catch(() => { })
 
     writeStoredSubscription(nextSnapshot)
     return nextSnapshot
@@ -359,7 +354,7 @@ export async function submitWaitlistEmail(email) {
     apiRequest('/waitlist', {
       method: 'POST',
       body: JSON.stringify({ email: normalizedEmail }),
-    }).catch(() => {})
+    }).catch(() => { })
 
     return {
       success: true,

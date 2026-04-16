@@ -12,7 +12,7 @@ export function AlphaexploraLandingView() {
   const waitlistRef = useRef(null)
   const [activeSection, setActiveSection] = useState('hero')
   const shellClass = 'mx-auto w-full max-w-[1500px] px-8 max-md:px-4'
-  const sectionClass = `${shellClass} snap-section border-t border-brand-border py-24 max-md:py-16`
+  const sectionClass = `${shellClass} snap-section border-t border-brand-border py-10 max-md:py-6`
   const navigationItems = [
     { href: '#features', label: 'Features' },
     { href: '#pricing', label: 'Pricing' },
@@ -136,14 +136,14 @@ export function AlphaexploraLandingView() {
         <div className="pointer-events-none absolute right-[8%] top-[12%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(110,231,183,0.2)_0%,transparent_68%)] blur-2xl"></div>
         <div className="pointer-events-none absolute left-[8%] top-[18%] h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.14)_0%,transparent_72%)] blur-3xl"></div>
 
-        <div className={`${shellClass} relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center py-16`} >
+        <div className={`${shellClass} relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center py-8`} >
           <div className="max-w-[860px] text-center mx-auto">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(110,231,183,0.28)] bg-brand-accent-dim2 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent animate-fade-up opacity-0 [animation-fill-mode:forwards]">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(110,231,183,0.28)] bg-brand-accent-dim2 px-3 py-1 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent animate-fade-up opacity-0 [animation-fill-mode:forwards]">
               <div className="h-1.5 w-1.5 rounded-full bg-brand-accent animate-[pulse_2.6s_infinite]"></div>
               Fintech workflow platform
             </div>
 
-            <h1 className="mb-6 max-w-[12ch] font-head text-[clamp(3rem,6vw,5.4rem)] font-extrabold leading-[1.1] tracking-[-0.05em] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:120ms] text-center">
+            <h1 className="mb-4 max-w-[12ch] font-head text-[clamp(3rem,6vw,5.4rem)] font-extrabold leading-[1.1] tracking-[-0.05em] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:120ms] text-center">
               Built to earn trust from the first scroll.
             </h1>
 
@@ -153,7 +153,7 @@ export function AlphaexploraLandingView() {
               visibility and automated multi-entity control.
             </p>
 
-            <div className="mt-10 flex flex-wrap justify-center gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:320ms] max-sm:flex-col">
+            <div className="mt-6 flex flex-wrap justify-center gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:320ms] max-sm:flex-col">
               <a
                 href="#pricing"
                 className="rounded-brand-sm bg-brand-accent px-7 py-3.5 text-center text-[15px] font-semibold text-[#052e16] transition-all duration-200 hover:-translate-y-[1px] hover:opacity-90"
@@ -169,12 +169,12 @@ export function AlphaexploraLandingView() {
             </div>
           </div>
 
-          <div className="mt-14 w-full overflow-hidden border border-brand-border bg-[rgba(11,22,40,0.72)] backdrop-blur-md reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+          <div className="mt-8 w-full overflow-hidden border border-brand-border bg-[rgba(11,22,40,0.72)] backdrop-blur-md reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
             <div className="flex w-full max-md:flex-col">
               {state.stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="flex flex-1 basis-0 flex-col justify-center border-r border-brand-border bg-[rgba(11,22,40,0.9)] px-6 py-8 last:border-r-0 max-md:basis-auto max-md:border-r-0 max-md:border-b last:max-md:border-b-0"
+                  className="flex flex-1 basis-0 flex-col justify-center border-r border-brand-border bg-[rgba(11,22,40,0.9)] px-4 py-5 last:border-r-0 max-md:basis-auto max-md:border-r-0 max-md:border-b last:max-md:border-b-0"
                 >
                   <div className="mb-2 font-head text-[clamp(2.4rem,4vw,4.4rem)] font-extrabold tracking-[-0.05em] text-brand-text">
                     {stat.value}
@@ -190,11 +190,11 @@ export function AlphaexploraLandingView() {
       </header >
 
       <section id="features" className={sectionClass}>
-        <div className="mb-16 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          <div className="mb-4 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
+        <div className="mb-6 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+          <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Features
           </div>
-          <h2 className="mb-5 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+          <h2 className="mb-3 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Unparalleled institutional capabilities designed for the modern era.
           </h2>
           <p className="max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
@@ -211,11 +211,11 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="pricing" className={sectionClass}>
-        <div className="mb-16 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          <div className="mb-4 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
+        <div className="mb-6 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+          <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Pricing
           </div>
-          <h2 className="mx-auto mb-5 max-w-[800px] font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+          <h2 className="mx-auto mb-3 max-w-[800px] font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Transparent institutional pricing for teams of all sizes.
           </h2>
           <p className="mx-auto max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
@@ -223,7 +223,7 @@ export function AlphaexploraLandingView() {
             advanced capabilities as your organization grows.
           </p>
 
-          <div className="mt-10 flex justify-center">
+          <div className="mt-6 flex justify-center">
             <div className="inline-flex overflow-hidden rounded-full border border-brand-border bg-[rgba(15,23,42,0.62)] p-1 font-body">
               {['monthly', 'annual'].map((mode) => (
                 <button
@@ -243,7 +243,7 @@ export function AlphaexploraLandingView() {
           </div>
         </div>
 
-        <div className="mb-12 text-center text-[15px] leading-[1.6] text-brand-text3">
+        <div className="mb-8 text-center text-[15px] leading-[1.6] text-brand-text3">
           Switching plans will immediately update your workspace and feature access.
         </div>
 
@@ -253,7 +253,7 @@ export function AlphaexploraLandingView() {
           </div>
         ) : null}
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] items-start gap-6 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] items-start gap-4 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           {state.plans.map((plan) => {
             const displayedPrice =
               plan.name === 'Starter'
@@ -278,11 +278,11 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="premium" ref={premiumRef} className={sectionClass}>
-        <div className="mb-12 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          <div className="mb-4 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
+        <div className="mb-6 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+          <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Premium unlocks
           </div>
-          <h2 className="mb-5 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+          <h2 className="mb-3 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             Unlock advanced institutional tools with a premium subscription.
           </h2>
           <p className="max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
@@ -300,7 +300,7 @@ export function AlphaexploraLandingView() {
             </div>
           )}
 
-          <div className={`grid grid-cols-1 gap-6 transition-all duration-700 md:grid-cols-2 lg:grid-cols-4 ${!vm.isUnlockedVisible ? 'grayscale opacity-40 blur-[1px] pointer-events-none' : ''}`}>
+          <div className={`grid grid-cols-1 gap-4 transition-all duration-700 md:grid-cols-2 lg:grid-cols-4 ${!vm.isUnlockedVisible ? 'grayscale opacity-40 blur-[1px] pointer-events-none' : ''}`}>
             {state.unlockedFeatures.map((feature) => (
               <ServiceCard
                 key={feature.title}
@@ -315,11 +315,11 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="testimonials" className={sectionClass}>
-        <div className="mb-16 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          <div className="mb-4 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
+        <div className="mb-6 reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+          <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Testimonials
           </div>
-          <h2 className="mb-5 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+          <h2 className="mb-3 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
             A simple testimonial slider keeps the long-scroll page interactive.
           </h2>
         </div>
@@ -335,14 +335,14 @@ export function AlphaexploraLandingView() {
           >
             {state.testimonials.map((testimonial) => (
               <div key={testimonial.name} className="min-w-full p-2">
-                <article className="relative rounded-brand border border-brand-border bg-brand-bg2 p-12 max-md:p-8">
-                  <div className="absolute top-8 right-8 text-sm tracking-[2px] text-brand-amber max-md:static max-md:mb-4">
+                <article className="relative rounded-brand border border-brand-border bg-brand-bg2 p-8 max-md:p-6">
+                  <div className="absolute top-6 right-6 text-sm tracking-[2px] text-brand-amber max-md:static max-md:mb-4">
                     &#9733;&#9733;&#9733;&#9733;&#9733;
                   </div>
-                  <div className="mb-8 font-head text-[5rem] leading-[0.5] text-brand-accent opacity-40">
+                  <div className="mb-4 font-head text-[4rem] leading-[0.5] text-brand-accent opacity-40">
                     &quot;
                   </div>
-                  <p className="mb-8 font-head text-[1.2rem] font-light italic leading-[1.7] text-brand-text">
+                  <p className="mb-6 font-head text-[1.2rem] font-light italic leading-[1.7] text-brand-text">
                     {testimonial.quote}
                   </p>
                   <div className="flex items-center gap-4 text-brand-text2">
@@ -362,7 +362,7 @@ export function AlphaexploraLandingView() {
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-6 flex items-center justify-center gap-4">
           <button
             className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-border2 bg-brand-bg3 text-base text-brand-text transition-all duration-200 hover:border-brand-accent hover:bg-brand-bg4 hover:text-brand-accent"
             type="button"
@@ -398,7 +398,7 @@ export function AlphaexploraLandingView() {
 
       <section id="waitlist" ref={waitlistRef} className={sectionClass}>
         <div className="mx-auto max-w-[640px] reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out flex-1 flex flex-col justify-center">
-          <div className="mb-4 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
+          <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Beta waitlist
           </div>
           <p className="mx-auto max-w-[560px] text-[1.05rem] leading-[1.7] text-brand-text2">
@@ -406,16 +406,16 @@ export function AlphaexploraLandingView() {
             onboarding a limited number of partners for our Q3 intake.
           </p>
 
-          <div className="mt-12">
+          <div className="mt-6">
             {state.successEmail ? (
               <div
-                className="mt-6 flex flex-col items-center gap-4 rounded-brand border border-[rgba(110,231,183,0.3)] bg-brand-accent-dim2 p-8"
+                className="mt-4 flex flex-col items-center gap-3 rounded-brand border border-[rgba(110,231,183,0.3)] bg-brand-accent-dim2 p-6"
                 aria-live="polite"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-2xl text-[#052e16]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-accent text-xl text-[#052e16]">
                   &#10003;
                 </div>
-                <h3 className="font-head text-[1.3rem] font-bold text-brand-accent">
+                <h3 className="font-head text-[1.2rem] font-bold text-brand-accent">
                   Reservation confirmed.
                 </h3>
                 <p className="text-sm text-brand-text2">
@@ -463,15 +463,15 @@ export function AlphaexploraLandingView() {
               </form>
             )}
 
-            <p className="mt-8 text-xs text-brand-text2">
+            <p className="mt-6 text-xs text-brand-text2">
               Privacy is our priority. Your data is handled according to our
               institutional security standards. No marketing spam, ever.
             </p>
           </div>
         </div>
 
-        <div id="footer" className="w-full border-t border-brand-border pt-12 mt-16 pb-0 flex flex-col">
-          <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4 text-left">
+        <div id="footer" className="w-full border-t border-brand-border pt-6 mt-8 pb-0 flex flex-col">
+          <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4 text-left">
             <div className="md:col-span-1">
               <Link
                 to="/"
@@ -490,7 +490,7 @@ export function AlphaexploraLandingView() {
               <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
                 Product
               </h4>
-              <ul className="list-none space-y-4 p-0">
+              <ul className="list-none space-y-3 p-0">
                 <li>
                   <a
                     href="#features"
@@ -522,7 +522,7 @@ export function AlphaexploraLandingView() {
               <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
                 Platform
               </h4>
-              <ul className="list-none space-y-4 p-0">
+              <ul className="list-none space-y-3 p-0">
                 <li>
                   <a
                     href="#"
@@ -554,7 +554,7 @@ export function AlphaexploraLandingView() {
               <h4 className="mb-6 font-head text-sm font-bold uppercase tracking-wider text-brand-text">
                 Contact
               </h4>
-              <div className="space-y-4 text-[14px] leading-relaxed text-brand-text2">
+              <div className="space-y-3 text-[14px] leading-relaxed text-brand-text2">
                 <p className="flex items-center gap-2">
                   <span className="text-brand-accent">Email:</span> hello@alphaexplora.com
                 </p>
@@ -587,26 +587,6 @@ export function AlphaexploraLandingView() {
           </div>
         </div>
       </section>
-
-      {/* Floating Concierge Button */}
-      {
-        vm.isConciergeAvailable && (
-          <button
-            type="button"
-            className="fixed bottom-8 right-8 z-[70] flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-[#052e16] shadow-[0_8px_32px_rgba(110,231,183,0.4)] transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_48px_rgba(110,231,183,0.6)] animate-fade-in"
-            aria-label="Contact Concierge"
-            onClick={() => alert('Opening Secure Concierge Channel...')}
-          >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
-            <div className="absolute -top-1 -right-1 flex h-4 w-4">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-amber opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-4 w-4 bg-brand-amber"></span>
-            </div>
-          </button>
-        )
-      }
     </div >
   )
 }

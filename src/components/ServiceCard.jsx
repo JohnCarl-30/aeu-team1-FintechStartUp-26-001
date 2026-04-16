@@ -21,17 +21,10 @@ export function ServiceCard({ service, isLocked }) {
         {service.description}
       </p>
 
-      {isLocked ? (
+      {isLocked && (
         <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.1em] text-brand-text3">
           <span className="text-[14px]">🔒</span> Premium Only
         </div>
-      ) : (
-        <button
-          className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.1em] text-brand-accent transition-colors hover:text-brand-text"
-          type="button"
-        >
-          Request Now <span className="text-[14px] transition-transform group-hover:translate-x-1">→</span>
-        </button>
       )}
     </article>
   )
