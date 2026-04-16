@@ -100,9 +100,10 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; 
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    padding: 6rem 0 4rem; /* Balanced padding for top/bottom */
   }
 
   a {

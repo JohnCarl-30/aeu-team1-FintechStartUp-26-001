@@ -52,8 +52,8 @@ export function PricingCard({
         {plan.getAnnualNote(pricingMode)}
       </div>
 
-      <div className="mb-8 flex-1">
-        <ul className="space-y-3">
+      <div className="mb-6 flex-1">
+        <ul className="space-y-2.5">
           {plan.features.map((item) => (
             <li key={item} className="flex items-start gap-2 text-[13px] leading-snug text-brand-text2">
               <div className="mt-0.5 flex h-[14px] w-[14px] shrink-0 items-center justify-center rounded-full bg-brand-accent/15 text-[8px] text-brand-accent" aria-hidden="true">
@@ -66,11 +66,12 @@ export function PricingCard({
       </div>
 
       <button
-        className={`w-full rounded-brand-sm px-4 py-2.5 text-center text-[13px] font-bold transition-all duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50
+        className={`mt-auto w-full rounded-brand-sm px-4 py-2.5 text-center text-[13px] font-bold transition-all duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50
           ${isFeatured || isSelected 
             ? 'bg-brand-accent text-[#052e16] hover:opacity-90 transition-all' 
             : 'bg-brand-bg3 text-brand-text border border-brand-border2 hover:bg-brand-bg4'}
         `}
+
         type="button"
         disabled={isDisabled}
         onClick={() => onSelect(plan.name)}

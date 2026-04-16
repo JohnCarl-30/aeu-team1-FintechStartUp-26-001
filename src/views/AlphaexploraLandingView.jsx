@@ -253,7 +253,7 @@ export function AlphaexploraLandingView() {
           </div>
         ) : null}
 
-        <div className="mx-auto max-w-[1100px] overflow-hidden rounded-brand border border-brand-border bg-brand-bg2 shadow-2xl reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+        <div className="mx-auto max-w-[1240px] rounded-brand border border-brand-border bg-brand-bg2 shadow-2xl reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="flex w-full flex-col md:flex-row">
             {state.plans.map((plan, index) => {
               const displayedPrice =
@@ -278,6 +278,7 @@ export function AlphaexploraLandingView() {
             })}
           </div>
         </div>
+
 
       </section>
 
