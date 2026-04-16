@@ -12,7 +12,7 @@ export function AlphaexploraLandingView() {
   const waitlistRef = useRef(null)
   const [activeSection, setActiveSection] = useState('hero')
   const shellClass = 'mx-auto w-full max-w-[1500px] px-8 max-md:px-4'
-  const sectionClass = `${shellClass} snap-section border-t border-brand-border py-10 max-md:py-6`
+  const sectionClass = `${shellClass} snap-section py-10 max-md:py-6`
   const navigationItems = [
     { href: '#features', label: 'Features' },
     { href: '#pricing', label: 'Pricing' },
@@ -89,7 +89,7 @@ export function AlphaexploraLandingView() {
 
   return (
     <div className="snap-container bg-brand-bg text-brand-text">
-      <nav id="top" className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-brand-border bg-[rgba(11,22,40,0.72)] backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards]">
+      <nav id="top" className="fixed top-0 left-0 right-0 z-50 h-16 bg-[rgba(11,22,40,0.72)] backdrop-blur-xl animate-fade-in opacity-0 [animation-fill-mode:forwards]">
         <div className={`${shellClass} flex h-full items-center justify-between gap-6`}>
           <div className="flex items-center gap-3">
             <Link
@@ -127,14 +127,17 @@ export function AlphaexploraLandingView() {
 
       <header id="hero" className="snap-section relative overflow-hidden pt-16">
         <div
-          className="pointer-events-none absolute inset-0 bg-[length:64px_64px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_45%,black_28%,transparent_100%)]"
+          className="pointer-events-none absolute inset-0 bg-[length:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black_30%,transparent_100%)] opacity-40"
           style={{
             backgroundImage:
-              'linear-gradient(var(--color-brand-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-border) 1px, transparent 1px)',
+              'linear-gradient(to right, var(--color-brand-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-border) 1px, transparent 1px)',
           }}
         ></div>
-        <div className="pointer-events-none absolute right-[8%] top-[12%] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(110,231,183,0.2)_0%,transparent_68%)] blur-2xl"></div>
-        <div className="pointer-events-none absolute left-[8%] top-[18%] h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.14)_0%,transparent_72%)] blur-3xl"></div>
+
+        {/* Amorphous Background Glows */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-full max-w-[1400px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(110,231,183,0.08)_0%,transparent_70%)] blur-3xl"></div>
+        <div className="pointer-events-none absolute left-[10%] top-[20%] h-[400px] w-[400px] rounded-full bg-brand-accent/5 blur-[120px]"></div>
+        <div className="pointer-events-none absolute right-[10%] bottom-[20%] h-[400px] w-[400px] rounded-full bg-brand-blue/5 blur-[120px]"></div>
 
         <div className={`${shellClass} relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center py-8`} >
           <div className="max-w-[860px] text-center mx-auto">
@@ -169,12 +172,12 @@ export function AlphaexploraLandingView() {
             </div>
           </div>
 
-          <div className="mt-8 w-full overflow-hidden border border-brand-border bg-[rgba(11,22,40,0.72)] backdrop-blur-md reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
+          <div className="mt-8 w-full overflow-hidden bg-[rgba(11,22,40,0.72)] backdrop-blur-md reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
             <div className="flex w-full max-md:flex-col">
               {state.stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="flex flex-1 basis-0 flex-col justify-center border-r border-brand-border bg-[rgba(11,22,40,0.9)] px-4 py-5 last:border-r-0 max-md:basis-auto max-md:border-r-0 max-md:border-b last:max-md:border-b-0"
+                  className="flex flex-1 basis-0 flex-col justify-center bg-[rgba(11,22,40,0.9)] px-4 py-5 max-md:basis-auto"
                 >
                   <div className="mb-2 font-head text-[clamp(2.4rem,4vw,4.4rem)] font-extrabold tracking-[-0.05em] text-brand-text">
                     {stat.value}
@@ -189,7 +192,7 @@ export function AlphaexploraLandingView() {
         </div>
       </header >
 
-      <section id="features" className={sectionClass}>
+      <section id="features" className={sectionClass.replace('border-t border-brand-border', 'border-t-0')}>
         <div className="mb-12 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
           <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
             Features
@@ -370,7 +373,7 @@ export function AlphaexploraLandingView() {
           </div>
         </div>
 
-          <div className="mt-6 flex items-center justify-center gap-4">
+        <div className="mt-6 flex items-center justify-center gap-4">
           <button
             className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-border2 bg-brand-bg3 text-base text-brand-text transition-all duration-200 hover:border-brand-accent hover:bg-brand-bg4 hover:text-brand-accent"
             type="button"
