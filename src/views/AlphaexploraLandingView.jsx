@@ -202,11 +202,10 @@ export function AlphaexploraLandingView() {
             Features
           </div>
           <h2 className="mx-auto mb-4 max-w-[900px] font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Unparalleled institutional capabilities designed for the modern era.
+            Built for scale. Engineered for compliance. Ready for enterprise.
           </h2>
           <p className="mx-auto max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
-            Built from the ground up for performance, security, and global scale.
-            Our infrastructure supports the most demanding fintech workloads.
+            From multi-entity treasury to automated compliance—we handle the complexity so your team can focus on growth.
           </p>
         </div>
 
