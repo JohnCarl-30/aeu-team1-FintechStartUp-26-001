@@ -154,6 +154,16 @@ export class AlphaexploraLandingViewModel extends BaseViewModel {
     return this.syncSubscription({ planName }, { shouldScroll: true })
   }
 
+  scrollToWaitlist() {
+    this.scrollRequestId += 1
+    this.setState({
+      scrollTarget: {
+        section: 'waitlist',
+        id: this.scrollRequestId,
+      },
+    })
+  }
+
   clearScrollTarget() {
     if (!this.state.scrollTarget) {
       return

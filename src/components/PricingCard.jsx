@@ -5,6 +5,7 @@ export function PricingCard({
   isSelected,
   isDisabled = false,
   onSelect,
+  onUpgrade,
   isLast = false,
 }) {
   const isFeatured = plan.featured
@@ -12,10 +13,11 @@ export function PricingCard({
   return (
     <article
       className={`
-        relative flex flex-col flex-1 p-8 font-body transition-all duration-300
+        relative flex flex-col flex-1 p-8 font-body transition-all duration-300 cursor-pointer hover:bg-brand-accent/2
         ${isSelected ? 'bg-brand-accent/5' : ''}
         ${!isLast ? 'border-r border-brand-border max-md:border-r-0 max-md:border-b' : ''}
       `}
+      onClick={() => !isDisabled && onSelect(plan.name)}
     >
       {isFeatured ? (
         <div className="absolute -top-[12px] left-1/2 -translate-x-1/2 rounded-full bg-brand-accent px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-[#052e16] z-10">
@@ -74,7 +76,10 @@ export function PricingCard({
 
         type="button"
         disabled={isDisabled}
-        onClick={() => onSelect(plan.name)}
+        onClick={(e) => {
+          e.stopPropagation()
+          onUpgrade()
+        }}
       >
         {isSelected ? 'Current Plan' : plan.buttonLabel}
       </button>

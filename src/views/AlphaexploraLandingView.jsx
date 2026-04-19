@@ -282,6 +282,7 @@ export function AlphaexploraLandingView() {
                   isSelected={state.selectedPlan === plan.name}
                   isDisabled={state.isSubscriptionLoading || state.isSubscriptionSaving}
                   onSelect={(planName) => vm.selectPlan(planName)}
+                  onUpgrade={() => vm.scrollToWaitlist()}
                   isLast={index === state.plans.length - 1}
                 />
               )
