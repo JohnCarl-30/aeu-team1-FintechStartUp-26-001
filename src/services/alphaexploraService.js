@@ -19,37 +19,37 @@ const landingPageContent = {
       icon: 'TR',
       title: 'Treasury Management',
       description:
-        'Command your global liquidity with real-time visibility across all entities and currencies.',
+        'Real-time visibility across all entities and currencies.',
     },
     {
       icon: 'RM',
       title: 'Risk Orchestration',
       description:
-        'Automated risk monitoring that surfaces anomalies and policy breaches before they escalate.',
+        'Automated monitoring that surfaces anomalies instantly.',
     },
     {
       icon: 'LD',
       title: 'Ledger-as-a-Service',
       description:
-        'Audit-ready, immutable ledger infrastructure built for high-throughput financial operations.',
+        'Audit-ready, immutable ledger for high-throughput operations.',
     },
     {
       icon: 'AN',
       title: 'Predictive Analytics',
       description:
-        'Turn historical patterns into actionable forecasts for cash flow, churn, and capacity planning.',
+        'Historical patterns into actionable forecasts.',
     },
     {
       icon: 'CO',
       title: 'Compliance Autopilot',
       description:
-        'Stay ahead of KYC, AML, and multi-jurisdiction regulatory requirements without the overhead.',
+        'Automated KYC, AML, and multi-jurisdiction compliance.',
     },
     {
       icon: 'EX',
       title: 'Open API Ecosystem',
       description:
-        'Developer-first APIs and SDKs designed for seamless integration with your existing tech stack.',
+        'Developer-first APIs for seamless integration.',
     },
   ],
   unlockedFeatures: [

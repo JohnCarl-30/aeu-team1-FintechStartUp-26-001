@@ -35,7 +35,6 @@ export function AlphaexploraLandingView() {
 
   useEffect(() => {
     vm.loadSubscriptionState()
-    vm.startAutoSlide()
 
     return () => vm.stopAutoSlide()
   }, [vm])
@@ -146,8 +145,10 @@ export function AlphaexploraLandingView() {
               Fintech workflow platform
             </div>
 
-            <h1 className="mb-4 max-w-[12ch] font-head text-[clamp(3rem,6vw,5.4rem)] font-extrabold leading-[1.1] tracking-[-0.05em] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:120ms] text-center">
-              Built to earn trust from the first scroll.
+            <h1 className="mb-4 max-w-[12ch] font-head text-[clamp(3rem,6vw,5.4rem)] font-extrabold leading-[1.1] tracking-[-0.05em] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:120ms] text-center ml-auto">
+              Scale confidently.<br />
+              Stay compliant.<br />
+              Move fast.
             </h1>
 
             <p className="max-w-[760px] text-[clamp(1rem,1.5vw,1.16rem)] leading-[1.8] text-brand-text2 animate-fade-in opacity-0 [animation-fill-mode:forwards] [animation-delay:220ms]">
@@ -156,7 +157,7 @@ export function AlphaexploraLandingView() {
               visibility and automated multi-entity control.
             </p>
 
-            <div className="mt-6 flex flex-wrap justify-center gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:320ms] max-sm:flex-col">
+            <div className="mt-6 flex flex-wrap justify-center gap-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:320ms] max-sm:flex-col ml-auto">
               <a
                 href="#pricing"
                 className="rounded-brand-sm bg-brand-accent px-7 py-3.5 text-center text-[15px] font-semibold text-[#052e16] transition-all duration-200 hover:-translate-y-[1px] hover:opacity-90"
@@ -193,19 +194,12 @@ export function AlphaexploraLandingView() {
       </header >
 
       <section id="features" className={sectionClass}>
-        <div 
-          className="pointer-events-none absolute inset-0 bg-[length:40px_40px] opacity-[0.15] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black_10%,transparent_100%)]"
-          style={{ backgroundImage: 'linear-gradient(to right, var(--color-brand-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-border) 1px, transparent 1px)' }}
-        ></div>
         <div className="mb-12 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
-            Features
-          </div>
-          <h2 className="mx-auto mb-4 max-w-[900px] font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Built for scale. Engineered for compliance. Ready for enterprise.
+          <h2 className="mx-auto mb-2 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+            Core Features
           </h2>
           <p className="mx-auto max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
-            From multi-entity treasury to automated compliance—we handle the complexity so your team can focus on growth.
+            Everything you need to scale with confidence.
           </p>
         </div>
 
@@ -217,20 +211,12 @@ export function AlphaexploraLandingView() {
       </section>
 
       <section id="pricing" className={sectionClass}>
-        <div 
-          className="pointer-events-none absolute inset-0 bg-[length:40px_40px] opacity-[0.15] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black_10%,transparent_100%)]"
-          style={{ backgroundImage: 'linear-gradient(to right, var(--color-brand-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-brand-border) 1px, transparent 1px)' }}
-        ></div>
         <div className="mb-6 text-center reveal opacity-0 translate-y-[30px] transition-all duration-600 ease-out">
-          <div className="mb-2 text-xs font-medium uppercase tracking-[0.08em] text-brand-accent">
-            Pricing
-          </div>
-          <h2 className="mx-auto mb-3 max-w-[800px] font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-            Transparent institutional pricing for teams of all sizes.
+          <h2 className="mx-auto mb-2 font-head text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.12] tracking-[-0.02em]">
+            Simple Pricing
           </h2>
           <p className="mx-auto max-w-[620px] text-[1.05rem] leading-[1.7] text-brand-text2">
-            Choose the plan that fits your current scale and unlock more
-            advanced capabilities as your organization grows.
+            Transparent pricing that scales with you.
           </p>
 
           <div className="mt-6 flex justify-center">
@@ -251,10 +237,6 @@ export function AlphaexploraLandingView() {
               ))}
             </div>
           </div>
-        </div>
-
-        <div className="mb-8 text-center text-[15px] leading-[1.6] text-brand-text3">
-          Switching plans will immediately update your workspace and feature access.
         </div>
 
         {state.subscriptionError ? (
